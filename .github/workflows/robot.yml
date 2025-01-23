@@ -29,7 +29,7 @@ jobs:
     - name: Install system dependencies
       run: |
         apt-get update
-        apt-get install -y wget unzip
+        apt-get install -y wget unzip chromium chromium-driver
 
     - name: Install Python dependencies
       run: |
@@ -57,12 +57,14 @@ jobs:
     - name: Run Robot Framework Tests
       env:
         SELENIUM_HUB_URL: http://selenium:4444/wd/hub
+        CHROME_DRIVER_PATH: /usr/bin/chromedriver
       run: |
         python -m robot \
           --outputdir reports \
           --variable BROWSER:chrome \
           --variable SELENIUM_HUB_URL:${SELENIUM_HUB_URL} \
           --variable HEADLESS:True \
+          --variable CHROME_DRIVER_PATH:${CHROME_DRIVER_PATH} \
           Calculator_v2/Tests/CalculatorTest.robot
 
     - name: Upload test results
