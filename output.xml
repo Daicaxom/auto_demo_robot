@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.12.1 on win32)" generated="2025-01-23T16:43:43.896968" rpa="false" schemaversion="5">
+<robot generator="Robot 7.0 (Python 3.12.1 on win32)" generated="2025-01-23T17:01:09.346630" rpa="false" schemaversion="5">
 <suite id="s1" name="CalculatorTest" source="D:\AUTOMATION TEST\Calculator_v2\Tests\CalculatorTest.robot">
 <kw name="Setup Calculator Test Environment" type="SETUP">
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-01-23T16:43:44.431529" level="INFO">Setting up calculator test environment</msg>
+<msg time="2025-01-23T17:01:09.737154" level="INFO">Setting up calculator test environment</msg>
 <arg>Setting up calculator test environment</arg>
 <arg>console=True</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.431529" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.737154" elapsed="0.000000"/>
 </kw>
 <kw name="Set Selenium Timeout" owner="SeleniumLibrary">
 <arg>${TIMEOUT}</arg>
 <doc>Sets the timeout that is used by various keywords.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.432532" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.737154" elapsed="0.000000"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-01-23T16:43:44.432532" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x00000213378EF8F0&gt;</msg>
+<msg time="2025-01-23T17:01:09.738659" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x000001F1C51EB2C0&gt;</msg>
 <var>${options}</var>
 <arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
 <arg>sys, selenium.webdriver</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.432532" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Call Method" owner="BuiltIn">
@@ -28,7 +28,7 @@
 <arg>add_argument</arg>
 <arg>--headless</arg>
 <doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.432532" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <arg>${HEADLESS}</arg>
 <arg>Call Method</arg>
@@ -36,37 +36,37 @@
 <arg>add_argument</arg>
 <arg>--headless</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.432532" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <kw name="Call Method" owner="BuiltIn">
 <arg>${options}</arg>
 <arg>add_argument</arg>
 <arg>--no-sandbox</arg>
 <doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.433528" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <kw name="Call Method" owner="BuiltIn">
 <arg>${options}</arg>
 <arg>add_argument</arg>
 <arg>--disable-dev-shm-usage</arg>
 <doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.433528" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <kw name="Call Method" owner="BuiltIn">
-<msg time="2025-01-23T16:43:44.433528" level="INFO">${capabilities} = {'browserName': 'chrome', 'pageLoadStrategy': 'normal', 'goog:chromeOptions': {'extensions': [], 'args': ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}}</msg>
+<msg time="2025-01-23T17:01:09.738659" level="INFO">${capabilities} = {'browserName': 'chrome', 'pageLoadStrategy': 'normal', 'goog:chromeOptions': {'extensions': [], 'args': ['--headless', '--no-sandbox', '--disable-dev-shm-usage']}}</msg>
 <var>${capabilities}</var>
 <arg>${options}</arg>
 <arg>to_capabilities</arg>
 <doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.433528" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:01:09.738659" elapsed="0.000000"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Create Webdriver" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:43:44.433528" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg time="2025-01-23T17:01:09.739663" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
 <arg>Chrome</arg>
 <arg>options=${options}</arg>
 <doc>Creates an instance of Selenium WebDriver.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.433528" elapsed="3.811250"/>
+<status status="PASS" start="2025-01-23T17:01:09.739663" elapsed="1.911704"/>
 </kw>
 <arg>'${REMOTE_URL}' != '${EMPTY}'</arg>
 <arg>Open Browser</arg>
@@ -79,482 +79,467 @@
 <arg>Chrome</arg>
 <arg>options=${options}</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-01-23T16:43:44.433528" elapsed="3.811250"/>
+<status status="PASS" start="2025-01-23T17:01:09.739663" elapsed="1.911704"/>
 </kw>
-<status status="PASS" start="2025-01-23T16:43:44.430529" elapsed="3.815263"/>
+<status status="PASS" start="2025-01-23T17:01:09.737154" elapsed="1.914213"/>
 </kw>
 <test id="s1-t1" name="User can perform basic integer addition" line="17">
 <kw name="Initialize Calculator Session" owner="CalculatorApp" type="SETUP">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:43:48.246779" level="INFO">Opening url 'https://www.calculator.net/'</msg>
+<msg time="2025-01-23T17:01:11.652348" level="INFO">Opening url 'https://testpages.eviltester.com/styled/apps/calculator.html'</msg>
 <arg>${URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-01-23T16:43:48.246779" elapsed="1.959112"/>
+<status status="PASS" start="2025-01-23T17:01:11.651367" elapsed="2.690317"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:00.325984" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:00.325984" level="FAIL">Element 'id=calculated-display' not visible after 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:43:50.206950" elapsed="10.132854">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Clear Display" owner="CalculatorApp">
-<status status="NOT RUN" start="2025-01-23T16:44:00.339804" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2025-01-23T16:43:48.245792" elapsed="12.094012">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
-<kw name="Run Keyword If Test Failed" owner="BuiltIn">
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:00.418984" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-01-23T16:44:00.340810" elapsed="0.078174"/>
-</kw>
-<arg>Capture Page Screenshot</arg>
-<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="PASS" start="2025-01-23T16:44:00.340810" elapsed="0.078174"/>
+<status status="PASS" start="2025-01-23T17:01:14.341684" elapsed="0.022463"/>
 </kw>
 <kw name="Clear Display" owner="CalculatorApp">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:10.616478" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-10.png"&gt;&lt;img src="selenium-screenshot-10.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:10.616478" level="FAIL">Element 'id=buttonallclear' not visible after 10 seconds.</msg>
 <arg>${CLEAR_BTN}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:44:00.418984" elapsed="10.198494">Element 'id=buttonallclear' not visible after 10 seconds.</status>
+<status status="PASS" start="2025-01-23T17:01:14.364147" elapsed="0.016001"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:10.617478" level="INFO">Clicking element 'id=buttonallclear'.</msg>
-<msg time="2025-01-23T16:44:10.689425" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-11.png"&gt;&lt;img src="selenium-screenshot-11.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:10.690431" level="FAIL">Element with locator 'id=buttonallclear' not found.</msg>
+<msg time="2025-01-23T17:01:14.380148" level="INFO">Clicking element 'id=buttonallclear'.</msg>
 <arg>${CLEAR_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2025-01-23T16:44:10.617478" elapsed="0.100306">Element with locator 'id=buttonallclear' not found.</status>
+<status status="PASS" start="2025-01-23T17:01:14.380148" elapsed="0.049748"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:20.812013" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-12.png"&gt;&lt;img src="selenium-screenshot-12.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:20.812013" level="FAIL">Element with locator 'id=calculated-display' not found.</msg>
+<msg time="2025-01-23T17:01:24.585945" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-33.png"&gt;&lt;img src="selenium-screenshot-33.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:01:24.585945" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>0</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="FAIL" start="2025-01-23T16:44:10.717784" elapsed="10.095367">Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:14.429896" elapsed="10.158050">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:44:00.418984" elapsed="20.394167">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:14.364147" elapsed="10.223799">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:44:00.340810" elapsed="20.472341">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:11.651367" elapsed="12.936579">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:24.648068" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-34.png"&gt;&lt;img src="selenium-screenshot-34.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-01-23T17:01:24.588947" elapsed="0.059121"/>
+</kw>
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-01-23T17:01:24.588947" elapsed="0.059121"/>
+</kw>
+<kw name="Clear Display" owner="CalculatorApp">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CLEAR_BTN}</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-01-23T17:01:24.648068" elapsed="0.013506"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:24.662580" level="INFO">Clicking element 'id=buttonallclear'.</msg>
+<arg>${CLEAR_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-01-23T17:01:24.662580" elapsed="0.047001"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:34.809560" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-35.png"&gt;&lt;img src="selenium-screenshot-35.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:01:34.810560" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
+<arg>${DISPLAY_LOCATOR}</arg>
+<arg>0</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="FAIL" start="2025-01-23T17:01:24.710582" elapsed="10.099978">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:01:24.648068" elapsed="10.163492">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:01:24.588947" elapsed="10.222613">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
 <doc>Verify that calculator can perform basic addition with integers</doc>
 <tag>addition</tag>
 <tag>integer</tag>
 <tag>smoke</tag>
-<status status="FAIL" start="2025-01-23T16:43:48.245792" elapsed="32.568223">Setup failed:
-Element 'id=calculated-display' not visible after 10 seconds.
+<status status="FAIL" start="2025-01-23T17:01:11.651367" elapsed="23.160193">Setup failed:
+Element 'id=calculated-display' did not get text '0' in 10 seconds.
 
 Also teardown failed:
-Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </test>
 <test id="s1-t2" name="User can perform basic integer multiplication" line="26">
 <kw name="Initialize Calculator Session" owner="CalculatorApp" type="SETUP">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:20.816013" level="INFO">Opening url 'https://www.calculator.net/'</msg>
+<msg time="2025-01-23T17:01:34.813560" level="INFO">Opening url 'https://testpages.eviltester.com/styled/apps/calculator.html'</msg>
 <arg>${URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-01-23T16:44:20.816013" elapsed="0.345221"/>
+<status status="PASS" start="2025-01-23T17:01:34.813560" elapsed="0.601021"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:31.366768" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-13.png"&gt;&lt;img src="selenium-screenshot-13.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:31.366768" level="FAIL">Element 'id=calculated-display' not visible after 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:44:21.162235" elapsed="10.204533">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Clear Display" owner="CalculatorApp">
-<status status="NOT RUN" start="2025-01-23T16:44:31.367798" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2025-01-23T16:44:20.816013" elapsed="10.551785">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
-<kw name="Run Keyword If Test Failed" owner="BuiltIn">
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:31.432210" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-14.png"&gt;&lt;img src="selenium-screenshot-14.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-01-23T16:44:31.368775" elapsed="0.063435"/>
-</kw>
-<arg>Capture Page Screenshot</arg>
-<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="PASS" start="2025-01-23T16:44:31.367798" elapsed="0.065413"/>
+<status status="PASS" start="2025-01-23T17:01:35.415582" elapsed="0.016989"/>
 </kw>
 <kw name="Clear Display" owner="CalculatorApp">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:41.628633" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-15.png"&gt;&lt;img src="selenium-screenshot-15.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:41.628633" level="FAIL">Element 'id=buttonallclear' not visible after 10 seconds.</msg>
 <arg>${CLEAR_BTN}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:44:31.433211" elapsed="10.196527">Element 'id=buttonallclear' not visible after 10 seconds.</status>
+<status status="PASS" start="2025-01-23T17:01:35.433573" elapsed="0.010997"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:41.629738" level="INFO">Clicking element 'id=buttonallclear'.</msg>
-<msg time="2025-01-23T16:44:41.698191" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-16.png"&gt;&lt;img src="selenium-screenshot-16.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:41.698191" level="FAIL">Element with locator 'id=buttonallclear' not found.</msg>
+<msg time="2025-01-23T17:01:35.445590" level="INFO">Clicking element 'id=buttonallclear'.</msg>
 <arg>${CLEAR_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2025-01-23T16:44:41.629738" elapsed="0.070477">Element with locator 'id=buttonallclear' not found.</status>
+<status status="PASS" start="2025-01-23T17:01:35.444570" elapsed="0.034441"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:51.918095" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-17.png"&gt;&lt;img src="selenium-screenshot-17.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:44:51.918095" level="FAIL">Element with locator 'id=calculated-display' not found.</msg>
+<msg time="2025-01-23T17:01:45.752830" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-36.png"&gt;&lt;img src="selenium-screenshot-36.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:01:45.752830" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>0</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="FAIL" start="2025-01-23T16:44:41.700215" elapsed="10.218878">Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:35.479011" elapsed="10.274847">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:44:31.433211" elapsed="20.485882">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:35.432571" elapsed="10.321287">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:44:31.367798" elapsed="20.551295">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:34.813560" elapsed="10.940298">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:45.812949" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-37.png"&gt;&lt;img src="selenium-screenshot-37.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-01-23T17:01:45.753858" elapsed="0.059091"/>
+</kw>
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-01-23T17:01:45.753858" elapsed="0.059091"/>
+</kw>
+<kw name="Clear Display" owner="CalculatorApp">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CLEAR_BTN}</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-01-23T17:01:45.812949" elapsed="0.013092"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:45.826041" level="INFO">Clicking element 'id=buttonallclear'.</msg>
+<arg>${CLEAR_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-01-23T17:01:45.826041" elapsed="0.035997"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:01:55.926971" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-38.png"&gt;&lt;img src="selenium-screenshot-38.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:01:55.926971" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
+<arg>${DISPLAY_LOCATOR}</arg>
+<arg>0</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="FAIL" start="2025-01-23T17:01:45.862038" elapsed="10.064933">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:01:45.812949" elapsed="10.114022">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:01:45.753858" elapsed="10.173113">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
 <doc>Verify that calculator can perform basic multiplication with integers</doc>
 <tag>integer</tag>
 <tag>multiplication</tag>
 <tag>smoke</tag>
-<status status="FAIL" start="2025-01-23T16:44:20.816013" elapsed="31.104079">Setup failed:
-Element 'id=calculated-display' not visible after 10 seconds.
+<status status="FAIL" start="2025-01-23T17:01:34.812560" elapsed="21.115764">Setup failed:
+Element 'id=calculated-display' did not get text '0' in 10 seconds.
 
 Also teardown failed:
-Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </test>
 <test id="s1-t3" name="User can perform decimal addition" line="35">
 <kw name="Initialize Calculator Session" owner="CalculatorApp" type="SETUP">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:44:51.921092" level="INFO">Opening url 'https://www.calculator.net/'</msg>
+<msg time="2025-01-23T17:01:55.929329" level="INFO">Opening url 'https://testpages.eviltester.com/styled/apps/calculator.html'</msg>
 <arg>${URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-01-23T16:44:51.921092" elapsed="0.989900"/>
+<status status="PASS" start="2025-01-23T17:01:55.929329" elapsed="0.631540"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:03.100731" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-18.png"&gt;&lt;img src="selenium-screenshot-18.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:03.100731" level="FAIL">Element 'id=calculated-display' not visible after 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:44:52.912008" elapsed="10.189721">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Clear Display" owner="CalculatorApp">
-<status status="NOT RUN" start="2025-01-23T16:45:03.101729" elapsed="0.000973"/>
-</kw>
-<status status="FAIL" start="2025-01-23T16:44:51.921092" elapsed="11.181610">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
-<kw name="Run Keyword If Test Failed" owner="BuiltIn">
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:03.173699" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-19.png"&gt;&lt;img src="selenium-screenshot-19.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-01-23T16:45:03.103597" elapsed="0.070102"/>
-</kw>
-<arg>Capture Page Screenshot</arg>
-<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="PASS" start="2025-01-23T16:45:03.103597" elapsed="0.070102"/>
+<status status="PASS" start="2025-01-23T17:01:56.560869" elapsed="0.011798"/>
 </kw>
 <kw name="Clear Display" owner="CalculatorApp">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:13.441231" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-20.png"&gt;&lt;img src="selenium-screenshot-20.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:13.441231" level="FAIL">Element 'id=buttonallclear' not visible after 10 seconds.</msg>
 <arg>${CLEAR_BTN}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:45:03.173699" elapsed="10.268534">Element 'id=buttonallclear' not visible after 10 seconds.</status>
+<status status="PASS" start="2025-01-23T17:01:56.572667" elapsed="0.010638"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:13.442233" level="INFO">Clicking element 'id=buttonallclear'.</msg>
-<msg time="2025-01-23T16:45:13.510804" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-21.png"&gt;&lt;img src="selenium-screenshot-21.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:13.510804" level="FAIL">Element with locator 'id=buttonallclear' not found.</msg>
+<msg time="2025-01-23T17:01:56.583305" level="INFO">Clicking element 'id=buttonallclear'.</msg>
 <arg>${CLEAR_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2025-01-23T16:45:13.442233" elapsed="0.069569">Element with locator 'id=buttonallclear' not found.</status>
+<status status="PASS" start="2025-01-23T17:01:56.583305" elapsed="0.031574"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:23.681784" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-22.png"&gt;&lt;img src="selenium-screenshot-22.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:23.681784" level="FAIL">Element with locator 'id=calculated-display' not found.</msg>
+<msg time="2025-01-23T17:02:06.730893" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-39.png"&gt;&lt;img src="selenium-screenshot-39.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:06.730893" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>0</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="FAIL" start="2025-01-23T16:45:13.511802" elapsed="10.170982">Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:56.614879" elapsed="10.117019">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:45:03.173699" elapsed="20.509085">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:56.572667" elapsed="10.159231">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:45:03.103597" elapsed="20.579187">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:01:55.929329" elapsed="10.802569">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:06.786322" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-40.png"&gt;&lt;img src="selenium-screenshot-40.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-01-23T17:02:06.732898" elapsed="0.053424"/>
+</kw>
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-01-23T17:02:06.732898" elapsed="0.053424"/>
+</kw>
+<kw name="Clear Display" owner="CalculatorApp">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CLEAR_BTN}</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-01-23T17:02:06.786322" elapsed="0.011510"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:06.797832" level="INFO">Clicking element 'id=buttonallclear'.</msg>
+<arg>${CLEAR_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-01-23T17:02:06.797832" elapsed="0.045971"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:17.102468" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-41.png"&gt;&lt;img src="selenium-screenshot-41.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:17.103468" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
+<arg>${DISPLAY_LOCATOR}</arg>
+<arg>0</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="FAIL" start="2025-01-23T17:02:06.843803" elapsed="10.259665">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:06.786322" elapsed="10.317146">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:06.731898" elapsed="10.371570">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
 <doc>Verify that calculator can perform addition with decimal numbers</doc>
 <tag>addition</tag>
 <tag>decimal</tag>
 <tag>smoke</tag>
-<status status="FAIL" start="2025-01-23T16:44:51.921092" elapsed="31.761692">Setup failed:
-Element 'id=calculated-display' not visible after 10 seconds.
+<status status="FAIL" start="2025-01-23T17:01:55.928324" elapsed="21.176145">Setup failed:
+Element 'id=calculated-display' did not get text '0' in 10 seconds.
 
 Also teardown failed:
-Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </test>
 <test id="s1-t4" name="User can perform decimal multiplication" line="44">
 <kw name="Initialize Calculator Session" owner="CalculatorApp" type="SETUP">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:23.684783" level="INFO">Opening url 'https://www.calculator.net/'</msg>
+<msg time="2025-01-23T17:02:17.105467" level="INFO">Opening url 'https://testpages.eviltester.com/styled/apps/calculator.html'</msg>
 <arg>${URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-01-23T16:45:23.684783" elapsed="1.005724"/>
+<status status="PASS" start="2025-01-23T17:02:17.105467" elapsed="0.615789"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:34.774853" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-23.png"&gt;&lt;img src="selenium-screenshot-23.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:34.774853" level="FAIL">Element 'id=calculated-display' not visible after 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:45:24.691508" elapsed="10.084345">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Clear Display" owner="CalculatorApp">
-<status status="NOT RUN" start="2025-01-23T16:45:34.777023" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2025-01-23T16:45:23.684783" elapsed="11.092240">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
-<kw name="Run Keyword If Test Failed" owner="BuiltIn">
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:34.846114" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-24.png"&gt;&lt;img src="selenium-screenshot-24.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-01-23T16:45:34.777023" elapsed="0.069091"/>
-</kw>
-<arg>Capture Page Screenshot</arg>
-<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="PASS" start="2025-01-23T16:45:34.777023" elapsed="0.069091"/>
+<status status="PASS" start="2025-01-23T17:02:17.722396" elapsed="0.016773"/>
 </kw>
 <kw name="Clear Display" owner="CalculatorApp">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:45.143220" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-25.png"&gt;&lt;img src="selenium-screenshot-25.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:45.143220" level="FAIL">Element 'id=buttonallclear' not visible after 10 seconds.</msg>
 <arg>${CLEAR_BTN}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:45:34.846114" elapsed="10.297106">Element 'id=buttonallclear' not visible after 10 seconds.</status>
+<status status="PASS" start="2025-01-23T17:02:17.740179" elapsed="0.011046"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:45.143220" level="INFO">Clicking element 'id=buttonallclear'.</msg>
-<msg time="2025-01-23T16:45:45.409061" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-26.png"&gt;&lt;img src="selenium-screenshot-26.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:45.409061" level="FAIL">Element with locator 'id=buttonallclear' not found.</msg>
+<msg time="2025-01-23T17:02:17.752240" level="INFO">Clicking element 'id=buttonallclear'.</msg>
 <arg>${CLEAR_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2025-01-23T16:45:45.143220" elapsed="0.265841">Element with locator 'id=buttonallclear' not found.</status>
+<status status="PASS" start="2025-01-23T17:02:17.752240" elapsed="0.036726"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:55.687321" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-27.png"&gt;&lt;img src="selenium-screenshot-27.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:45:55.688321" level="FAIL">Element with locator 'id=calculated-display' not found.</msg>
+<msg time="2025-01-23T17:02:27.957175" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-42.png"&gt;&lt;img src="selenium-screenshot-42.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:27.957175" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>0</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="FAIL" start="2025-01-23T16:45:45.409061" elapsed="10.279927">Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:17.788966" elapsed="10.169196">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:45:34.846114" elapsed="20.842874">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:17.739169" elapsed="10.218993">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:45:34.777023" elapsed="20.911965">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:17.105467" elapsed="10.852695">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:28.051080" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-43.png"&gt;&lt;img src="selenium-screenshot-43.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-01-23T17:02:27.960236" elapsed="0.090844"/>
+</kw>
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-01-23T17:02:27.960236" elapsed="0.090844"/>
+</kw>
+<kw name="Clear Display" owner="CalculatorApp">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CLEAR_BTN}</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-01-23T17:02:28.052686" elapsed="0.080706"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:28.133392" level="INFO">Clicking element 'id=buttonallclear'.</msg>
+<arg>${CLEAR_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-01-23T17:02:28.133392" elapsed="0.126045"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:38.480654" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-44.png"&gt;&lt;img src="selenium-screenshot-44.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:38.480654" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
+<arg>${DISPLAY_LOCATOR}</arg>
+<arg>0</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="FAIL" start="2025-01-23T17:02:28.260616" elapsed="10.221032">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:28.051782" elapsed="10.429866">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:27.959168" elapsed="10.522480">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
 <doc>Verify that calculator can perform multiplication with decimal numbers</doc>
 <tag>decimal</tag>
 <tag>multiplication</tag>
 <tag>smoke</tag>
-<status status="FAIL" start="2025-01-23T16:45:23.684783" elapsed="32.004205">Setup failed:
-Element 'id=calculated-display' not visible after 10 seconds.
+<status status="FAIL" start="2025-01-23T17:02:17.105467" elapsed="21.376824">Setup failed:
+Element 'id=calculated-display' did not get text '0' in 10 seconds.
 
 Also teardown failed:
-Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </test>
 <test id="s1-t5" name="User can perform memory operations sequence" line="53">
 <kw name="Initialize Calculator Session" owner="CalculatorApp" type="SETUP">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:45:55.690993" level="INFO">Opening url 'https://www.calculator.net/'</msg>
+<msg time="2025-01-23T17:02:38.483312" level="INFO">Opening url 'https://testpages.eviltester.com/styled/apps/calculator.html'</msg>
 <arg>${URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-01-23T16:45:55.690993" elapsed="1.069607"/>
+<status status="PASS" start="2025-01-23T17:02:38.483312" elapsed="0.639839"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:46:07.012398" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-28.png"&gt;&lt;img src="selenium-screenshot-28.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:46:07.012398" level="FAIL">Element 'id=calculated-display' not visible after 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:45:56.760600" elapsed="10.252799">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Clear Display" owner="CalculatorApp">
-<status status="NOT RUN" start="2025-01-23T16:46:07.013399" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2025-01-23T16:45:55.690993" elapsed="11.322406">Element 'id=calculated-display' not visible after 10 seconds.</status>
-</kw>
-<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
-<kw name="Run Keyword If Test Failed" owner="BuiltIn">
-<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:46:07.081046" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-29.png"&gt;&lt;img src="selenium-screenshot-29.png" width="800px"&gt;&lt;/a&gt;</msg>
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="PASS" start="2025-01-23T16:46:07.014399" elapsed="0.066647"/>
-</kw>
-<arg>Capture Page Screenshot</arg>
-<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
-<status status="PASS" start="2025-01-23T16:46:07.014399" elapsed="0.066647"/>
+<status status="PASS" start="2025-01-23T17:02:39.123151" elapsed="0.018005"/>
 </kw>
 <kw name="Clear Display" owner="CalculatorApp">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:46:17.215367" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-30.png"&gt;&lt;img src="selenium-screenshot-30.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:46:17.215367" level="FAIL">Element 'id=buttonallclear' not visible after 10 seconds.</msg>
 <arg>${CLEAR_BTN}</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2025-01-23T16:46:07.082045" elapsed="10.134465">Element 'id=buttonallclear' not visible after 10 seconds.</status>
+<status status="PASS" start="2025-01-23T17:02:39.141156" elapsed="0.014266"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:46:17.216510" level="INFO">Clicking element 'id=buttonallclear'.</msg>
-<msg time="2025-01-23T16:46:17.285518" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-31.png"&gt;&lt;img src="selenium-screenshot-31.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:46:17.285518" level="FAIL">Element with locator 'id=buttonallclear' not found.</msg>
+<msg time="2025-01-23T17:02:39.155422" level="INFO">Clicking element 'id=buttonallclear'.</msg>
 <arg>${CLEAR_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="FAIL" start="2025-01-23T16:46:17.216510" elapsed="0.070008">Element with locator 'id=buttonallclear' not found.</status>
+<status status="PASS" start="2025-01-23T17:02:39.155422" elapsed="0.034009"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<msg time="2025-01-23T16:46:27.418761" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-32.png"&gt;&lt;img src="selenium-screenshot-32.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-01-23T16:46:27.418761" level="FAIL">Element with locator 'id=calculated-display' not found.</msg>
+<msg time="2025-01-23T17:02:49.447985" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-45.png"&gt;&lt;img src="selenium-screenshot-45.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:49.447985" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
 <arg>${DISPLAY_LOCATOR}</arg>
 <arg>0</arg>
 <arg>${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="FAIL" start="2025-01-23T16:46:17.286518" elapsed="10.133244">Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:39.189431" elapsed="10.259558">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:46:07.082045" elapsed="20.337717">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:39.141156" elapsed="10.307833">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
-<status status="FAIL" start="2025-01-23T16:46:07.013399" elapsed="20.406363">Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+<status status="FAIL" start="2025-01-23T17:02:38.483312" elapsed="10.965677">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<kw name="Cleanup Calculator Session" owner="CalculatorApp" type="TEARDOWN">
+<kw name="Run Keyword If Test Failed" owner="BuiltIn">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:49.516742" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-46.png"&gt;&lt;img src="selenium-screenshot-46.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-01-23T17:02:49.450999" elapsed="0.066743"/>
+</kw>
+<arg>Capture Page Screenshot</arg>
+<doc>Runs the given keyword with the given arguments, if the test failed.</doc>
+<status status="PASS" start="2025-01-23T17:02:49.450038" elapsed="0.067704"/>
+</kw>
+<kw name="Clear Display" owner="CalculatorApp">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CLEAR_BTN}</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-01-23T17:02:49.517742" elapsed="0.013237"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:49.530979" level="INFO">Clicking element 'id=buttonallclear'.</msg>
+<arg>${CLEAR_BTN}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-01-23T17:02:49.530979" elapsed="0.032345"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<msg time="2025-01-23T17:02:59.660583" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-47.png"&gt;&lt;img src="selenium-screenshot-47.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-01-23T17:02:59.660583" level="FAIL">Element 'id=calculated-display' did not get text '0' in 10 seconds.</msg>
+<arg>${DISPLAY_LOCATOR}</arg>
+<arg>0</arg>
+<arg>${TIMEOUT}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="FAIL" start="2025-01-23T17:02:49.563324" elapsed="10.098275">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:49.517742" elapsed="10.143857">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
+</kw>
+<status status="FAIL" start="2025-01-23T17:02:49.450038" elapsed="10.211561">Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </kw>
 <doc>Verify that calculator can perform a sequence of memory operations</doc>
 <tag>memory</tag>
 <tag>smoke</tag>
-<status status="FAIL" start="2025-01-23T16:45:55.690993" elapsed="31.728769">Setup failed:
-Element 'id=calculated-display' not visible after 10 seconds.
+<status status="FAIL" start="2025-01-23T17:02:38.482291" elapsed="21.179308">Setup failed:
+Element 'id=calculated-display' did not get text '0' in 10 seconds.
 
 Also teardown failed:
-Several failures occurred:
-
-1) Element 'id=buttonallclear' not visible after 10 seconds.
-
-2) Element with locator 'id=buttonallclear' not found.
-
-3) Element with locator 'id=calculated-display' not found.</status>
+Element 'id=calculated-display' did not get text '0' in 10 seconds.</status>
 </test>
 <kw name="Cleanup Calculator Test Environment" type="TEARDOWN">
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-01-23T16:46:27.421761" level="INFO">Cleaning up calculator test environment</msg>
+<msg time="2025-01-23T17:02:59.663583" level="INFO">Cleaning up calculator test environment</msg>
 <arg>Cleaning up calculator test environment</arg>
 <arg>console=True</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-01-23T16:46:27.421761" elapsed="0.000000"/>
+<status status="PASS" start="2025-01-23T17:02:59.663583" elapsed="0.001000"/>
 </kw>
 <kw name="Close All Browsers" owner="SeleniumLibrary">
 <doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" start="2025-01-23T16:46:27.421761" elapsed="6.230257"/>
+<status status="PASS" start="2025-01-23T17:02:59.664583" elapsed="6.367187"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-01-23T16:46:33.653318" level="INFO">Calculator environment cleanup completed</msg>
+<msg time="2025-01-23T17:03:06.032756" level="INFO">Calculator environment cleanup completed</msg>
 <arg>Calculator environment cleanup completed</arg>
 <arg>console=True</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-01-23T16:46:33.652018" elapsed="0.001300"/>
+<status status="PASS" start="2025-01-23T17:03:06.031770" elapsed="0.000986"/>
 </kw>
-<status status="PASS" start="2025-01-23T16:46:27.421761" elapsed="6.231557"/>
+<status status="PASS" start="2025-01-23T17:02:59.663583" elapsed="6.369173"/>
 </kw>
 <doc>Test suite for calculator functionality using BDD approach</doc>
-<status status="FAIL" start="2025-01-23T16:43:43.898967" elapsed="169.754351"/>
+<status status="FAIL" start="2025-01-23T17:01:09.348767" elapsed="116.683989"/>
 </suite>
 <statistics>
 <total>
@@ -573,6 +558,6 @@ Several failures occurred:
 </suite>
 </statistics>
 <errors>
-<msg time="2025-01-23T16:43:44.172966" level="WARN">Error in file 'D:\AUTOMATION TEST\Calculator_v2\Resources\CalculatorApp.resource' on line 67: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-01-23T17:01:09.596917" level="WARN">Error in file 'D:\AUTOMATION TEST\Calculator_v2\Resources\CalculatorApp.resource' on line 68: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
 </errors>
 </robot>

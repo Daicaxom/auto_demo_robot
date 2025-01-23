@@ -7,7 +7,7 @@ Library    Collections
 ${CALCULATOR_DISPLAY}    id=calculated-display
 ${CALCULATOR_CLEAR}      id=buttonallclear
 ${CALCULATOR_EQUALS}     id=buttonequals
-${DEFAULT_VALUE}         0
+${DEFAULT_VALUE}         ${EMPTY}
 
 # Number buttons
 &{NUMBER_BUTTONS}
