@@ -4,6 +4,11 @@ Library    String
 Library    Collections
 
 *** Variables ***
+${BROWSER}        chrome
+${URL}           https://testpages.eviltester.com/styled/apps/calculator.html
+${HEADLESS}      ${TRUE}
+${TIMEOUT}       20s
+${RETRY}         0.5s
 ${CALCULATOR_DISPLAY}    id=calculated-display
 ${CALCULATOR_CLEAR}      id=buttonallclear
 ${CALCULATOR_EQUALS}     id=buttonequals
@@ -32,7 +37,7 @@ ${DECIMAL_BTN}          id=buttondot
 ${MEMORY_IN_BTN}        id=buttonmemoryin
 ${MEMORY_ADD_BTN}       id=buttonmemoryplus
 ${MEMORY_RECALL_BTN}    id=buttonmemoryrecall
-${CLEAR_ENTRY_BTN}      id=buttonclearentry
+${CLEAR_BTN}            id=buttonclearentry
 
 *** Keywords ***
 Wait And Click Element
@@ -73,19 +78,21 @@ Click Memory Recall
     Wait And Click Element    ${MEMORY_RECALL_BTN}
 
 Click Clear Entry
-    Wait And Click Element    ${CLEAR_ENTRY_BTN}
+    Wait And Click Element    ${CLEAR_BTN}
 
 Get Display Value
     Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}
     ${value}=    Get Element Attribute    ${CALCULATOR_DISPLAY}    value
-    ${value}=    Set Variable If    '${value}' == ''    0    ${value}
+    ${value}=    Set Variable If    '${value}' == ''    ${DEFAULT_VALUE}    ${value}
     RETURN    ${value}
 
 Convert And Compare Numbers
     [Arguments]    ${actual}    ${expected}
-    ${actual}=    Convert To Number    ${actual}
-    ${expected}=    Convert To Number    ${expected}
-    Should Be Equal As Numbers    ${actual}    ${expected}
+    ${actual_num}=    Run Keyword If    '${actual}' == ''    Set Variable    0
+    ...    ELSE    Convert To Number    ${actual}
+    ${expected_num}=    Run Keyword If    '${expected}' == ''    Set Variable    0
+    ...    ELSE    Convert To Number    ${expected}
+    Should Be Equal As Numbers    ${actual_num}    ${expected_num}
 
 Verify Display Value
     [Arguments]    ${expected}
@@ -95,3 +102,8 @@ Verify Display Value
 Wait Until Display Shows
     [Arguments]    ${expected}
     Wait Until Keyword Succeeds    5s    1s    Verify Display Value    ${expected}
+
+Clear Display
+    Wait Until Element Is Visible    ${CLEAR_BTN}    ${TIMEOUT}
+    Click Element    ${CLEAR_BTN}
+    Verify Display Shows    ${DEFAULT_VALUE}

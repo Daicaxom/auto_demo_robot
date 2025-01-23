@@ -18,11 +18,7 @@ Enter Number
     END
     Sleep    0.2s
 
-Clear Display
-    [Documentation]    Clears the calculator display
-    Log    Clearing calculator display    console=True
-    Click All Clear
-    Verify Display Shows    0
+
 
 # Operation Actions
 Press Addition Operator
