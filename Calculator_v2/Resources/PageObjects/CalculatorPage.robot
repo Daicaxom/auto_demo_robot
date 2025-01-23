@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
+Library    uuid
 
 *** Variables ***
 ${BROWSER}        chrome
@@ -117,12 +118,17 @@ Setup Calculator Environment
     
     Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
     
-    # Add unique user data directory
-    ${timestamp}=    Get Time    epoch
-    Call Method    ${options}    add_argument    --user-data-dir=/tmp/chrome_profile_${timestamp}
+    # Generate unique user data directory using UUID instead of timestamp
+    ${uuid}=    Evaluate    str(uuid.uuid4())    uuid
+    ${user_data_dir}=    Set Variable    /tmp/chrome_profile_${uuid}
+    Call Method    ${options}    add_argument    --user-data-dir=${user_data_dir}
     
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    
+    # Add these arguments to improve stability in CI environment
+    Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --window-size=1920,1080
     
     ${capabilities}=    Call Method    ${options}    to_capabilities
     
