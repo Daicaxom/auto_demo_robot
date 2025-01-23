@@ -1,3 +1,4 @@
+
 name: Robot Framework Tests
 
 on:
@@ -40,6 +41,7 @@ jobs:
       run: |
         mkdir -p Scripts
         cat > Scripts/setup_test_env.py << 'EOF'
+        import time
         from selenium import webdriver
         from selenium.webdriver.chrome.options import Options
 
@@ -51,6 +53,12 @@ jobs:
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--disable-gpu')
             options.add_argument('--window-size=1920,1080')
+            
+            # Generate unique user-data-dir
+            timestamp = str(int(time.time()))
+            user_data_dir = f'/tmp/chrome_user_data_{timestamp}'
+            options.add_argument(f'--user-data-dir={user_data_dir}')
+            
             return options
         EOF
 
