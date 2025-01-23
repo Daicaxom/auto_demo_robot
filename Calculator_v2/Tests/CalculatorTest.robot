@@ -6,8 +6,8 @@ Resource          ../Resources/CalculatorApp.resource
 
 Suite Setup       Setup Calculator Test Environment
 Suite Teardown    Cleanup Calculator Test Environment
-Test Setup       Initialize Calculator Session
-Test Teardown    Cleanup Calculator Session
+Test Setup       CalculatorApp.Initialize Calculator Session
+Test Teardown    CalculatorApp.Cleanup Calculator Session
 
 *** Variables ***
 ${TIMEOUT}    10s
