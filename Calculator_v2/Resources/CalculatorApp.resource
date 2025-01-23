@@ -12,7 +12,7 @@ ${TIMEOUT}       10s
 Setup Calculator Test Environment
     ${options}=    setup_test_env.Get Chrome Options    ${HEADLESS}
     Set Selenium Timeout    ${TIMEOUT}
-    Open Browser    ${URL}    ${BROWSER}    options=${options}
+    Create Webdriver    Chrome    options=${options}
     Set Window Size    1920    1080
 
 Cleanup Calculator Test Environment

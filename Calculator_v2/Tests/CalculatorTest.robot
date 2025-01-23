@@ -10,11 +10,8 @@ Test Setup       Initialize Calculator Session
 Test Teardown    Cleanup Calculator Session
 
 *** Variables ***
-${BROWSER}    chrome
 ${TIMEOUT}    10s
 ${HEADLESS}    ${TRUE}
-${REMOTE_URL}    ${EMPTY}
-${BROWSER_OPTIONS}    ${EMPTY}
 
 *** Test Cases ***
 User can perform basic integer addition
