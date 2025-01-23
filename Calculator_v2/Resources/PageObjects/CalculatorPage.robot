@@ -118,17 +118,15 @@ Setup Calculator Environment
     
     Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
     
-    # Generate unique user data directory using UUID instead of timestamp
-    ${uuid}=    Evaluate    str(uuid.uuid4())    uuid
-    ${user_data_dir}=    Set Variable    /tmp/chrome_profile_${uuid}
-    Call Method    ${options}    add_argument    --user-data-dir=${user_data_dir}
-    
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
-    
-    # Add these arguments to improve stability in CI environment
     Call Method    ${options}    add_argument    --disable-gpu
     Call Method    ${options}    add_argument    --window-size=1920,1080
+    
+    # Add these arguments to prevent profile/user-data issues
+    Call Method    ${options}    add_argument    --incognito
+    Call Method    ${options}    add_argument    --disable-extensions
+    Call Method    ${options}    add_argument    --disable-popup-blocking
     
     ${capabilities}=    Call Method    ${options}    to_capabilities
     
