@@ -63,8 +63,20 @@ jobs:
         import os
         import undetected_chromedriver.v2 as uc
         import uuid
+        import shutil
+        import tempfile
+
+        def cleanup_chrome_dirs():
+            temp_dir = tempfile.gettempdir()
+            for item in os.listdir(temp_dir):
+                if item.startswith('chrome_userdata_'):
+                    try:
+                        shutil.rmtree(os.path.join(temp_dir, item))
+                    except:
+                        pass
 
         def get_chrome_options(headless=True):
+            cleanup_chrome_dirs()
             options = uc.ChromeOptions()
             if headless:
                 options.add_argument('--headless=new')
@@ -75,29 +87,29 @@ jobs:
             options.add_argument('--no-default-browser-check')
             options.add_argument('--password-store=basic')
             # Generate a unique user data directory for each session
-            unique_dir = f"/tmp/chrome_userdata_{uuid.uuid4()}"
+            unique_dir = os.path.join(tempfile.gettempdir(), f"chrome_userdata_{uuid.uuid4()}")
             options.add_argument(f'--user-data-dir={unique_dir}')
             return options
 
         def create_chromedriver(headless=True):
             options = get_chrome_options(headless)
-            chrome = uc.Chrome(headless=headless, options=options)
+            chrome = uc.Chrome(options=options)
             return chrome
-
-        if __name__ == '__main__':
-            driver = create_chromedriver(headless=True)
-            try:
-                driver.get("https://www.google.com")
-                print("Google page loaded successfully in headless mode with undetected-chromedriver.")
-            finally:
-                driver.quit()
         EOF
 
     - name: Run Robot Framework Tests
       env:
         BROWSER: chrome
         HEADLESS: "True"
+        PYTHONUNBUFFERED: "1"
       run: |
+        # Cleanup any existing Chrome processes
+        pkill chrome || true
+        pkill chromedriver || true
+        
+        # Remove existing Chrome user data directories
+        rm -rf /tmp/chrome_userdata_* || true
+        
         python -m robot \
           --outputdir reports \
           --variable BROWSER:${BROWSER} \
