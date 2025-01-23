@@ -5,7 +5,7 @@ Library    String
 
 *** Variables ***
 ${BROWSER}        chrome
-${URL}           https://www.calculator.net/
+${URL}           https://testpages.eviltester.com/styled/apps/calculator.html
 ${HEADLESS}      ${TRUE}
 ${TIMEOUT}       20s
 ${RETRY}         0.5s
@@ -25,8 +25,9 @@ Setup Calculator Test Environment
     ${options}=    setup_test_env.Get Chrome Options    ${HEADLESS}
     Set Selenium Timeout    ${TIMEOUT}
     Set Selenium Speed     ${RETRY}
-    Open Browser    ${URL}    ${BROWSER}    options=${options}
+    Create Webdriver    Chrome    options=${options}
     Set Window Size    1920    1080
+    Go To    ${URL}
     Wait Until Element Is Visible    ${DISPLAY_LOCATOR}    ${TIMEOUT}
 
 Initialize Calculator Session

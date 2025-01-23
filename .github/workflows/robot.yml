@@ -2,42 +2,51 @@ name: Robot Framework Tests
 
 on:
   push:
-    branches: [ main,master ]
+    branches: [ main, master ]
   pull_request:
     branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: 
+    container:
       image: selenium/standalone-chrome:latest
       options: --shm-size=2g --user root
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        persist-credentials: false
-    
-    - name: Install Python and setup venv
+      
+    - name: Install Python and dependencies
       run: |
         apt-get update
-        apt-get install -y python3-full python3-venv
+        apt-get install -y python3-pip python3-venv
         python3 -m venv /opt/venv
         . /opt/venv/bin/activate
-        python3 -m pip install --upgrade pip
         pip install robotframework==6.1.1 robotframework-seleniumlibrary==6.1.3 selenium==4.16.0
-    
-    - name: Fix permissions
+
+    - name: Update setup_test_env.py
       run: |
-        chown -R root:root $GITHUB_WORKSPACE
-        chmod -R 755 $GITHUB_WORKSPACE
-    
+        cat > Scripts/setup_test_env.py << 'EOF'
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+
+        def get_chrome_options(headless=True):
+            options = Options()
+            if headless:
+                options.add_argument('--headless=new')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1080')
+            return options
+        EOF
+
     - name: Run Robot Framework Tests
       run: |
         . /opt/venv/bin/activate
-        python -m robot --outputdir reports --variable HEADLESS:True Calculator_v2/Tests/CalculatorTest.robot
-    
+        python3 -m robot --outputdir reports --variable HEADLESS:True Calculator_v2/Tests/CalculatorTest.robot
+
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
