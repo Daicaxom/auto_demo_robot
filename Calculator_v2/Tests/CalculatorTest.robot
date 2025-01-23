@@ -2,11 +2,10 @@
 Documentation     Test suite for calculator functionality using BDD approach
 Resource          ../Resources/TestFlows/CalculatorFlow.robot
 Resource          ../Resources/TestData/CalculatorData.robot
-Library           SeleniumLibrary
-Library           BuiltIn
+Resource          ../Resources/CalculatorApp.resource
 
-Suite Setup       Setup Calculator Environment
-Suite Teardown    Cleanup Calculator Environment
+Suite Setup       Setup Calculator Test Environment
+Suite Teardown    Cleanup Calculator Test Environment
 Test Setup       Initialize Calculator Session
 Test Teardown    Cleanup Calculator Session
 
@@ -117,7 +116,7 @@ Result should match expected memory operation value
     Verify Calculation Result    ${TEST_DATA}[expected_result]
 
 # Setup and Teardown
-Setup Calculator Environment
+Setup Calculator Test Environment
     Log    Setting up calculator test environment    console=True
     Set Selenium Timeout    ${TIMEOUT}
     
@@ -139,7 +138,7 @@ Setup Calculator Environment
     ...    ELSE    
     ...    Create Webdriver    Chrome    chrome_options=${options}
 
-Cleanup Calculator Environment
+Cleanup Calculator Test Environment
     Log    Cleaning up calculator test environment    console=True
     Close All Browsers
     Log    Calculator environment cleanup completed    console=True
