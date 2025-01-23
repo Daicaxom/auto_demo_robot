@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 def setup_webdrivers():
     """Download and setup WebDrivers"""
@@ -25,10 +26,15 @@ def create_directories():
 def get_chrome_options(headless=True):
     options = Options()
     if headless:
-        options.add_argument('--headless')
+        options.add_argument('--headless=new')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     return options
+
+def get_webdriver(options):
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    return driver
 
 def main():
     parser = argparse.ArgumentParser(description='Setup test environment')
