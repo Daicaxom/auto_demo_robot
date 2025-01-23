@@ -68,7 +68,7 @@ jobs:
     - name: Run Robot Framework Tests
       env:
         BROWSER: chrome
-        HEADLESS: 'true'
+        HEADLESS: "True"
       run: |
         python -m robot \
           --outputdir reports \
