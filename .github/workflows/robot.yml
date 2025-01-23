@@ -1,0 +1,57 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:    # Cho phép chạy thủ công từ GitHub UI
+
+jobs:
+  test:
+    runs-on: ubuntu-latest    # Chạy trên Ubuntu mới nhất
+    
+    steps:
+    - uses: actions/checkout@v3    # Check out code từ repository
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'    # Chọn phiên bản Python
+        
+    - name: Install Chrome
+      run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        
+    - name: Install ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1)
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install robotframework
+        pip install robotframework-seleniumlibrary
+        pip install webdrivermanager
+        
+    - name: Run Robot Framework Tests
+      run: |
+        robot --outputdir reports --variable HEADLESS:${TRUE} Calculator_v2/Tests/CalculatorTest.robot
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()    # Upload kết quả ngay cả khi test fail
+      with:
+        name: robot-test-results
+        path: |
+          reports/log.html
+          reports/report.html
+          reports/output.xml 

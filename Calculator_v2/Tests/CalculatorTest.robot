@@ -13,6 +13,9 @@ Test Teardown    Cleanup Calculator Session
 *** Variables ***
 ${BROWSER}    chrome
 ${TIMEOUT}    10s
+${HEADLESS}    ${TRUE}
+${REMOTE_URL}    ${EMPTY}
+${BROWSER_OPTIONS}    ${EMPTY}
 
 *** Test Cases ***
 User can perform basic integer addition
@@ -117,7 +120,24 @@ Result should match expected memory operation value
 Setup Calculator Environment
     Log    Setting up calculator test environment    console=True
     Set Selenium Timeout    ${TIMEOUT}
-    Log    Calculator environment setup completed    console=True
+    
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    
+    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
+    
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    
+    ${capabilities}=    Call Method    ${options}    to_capabilities
+    
+    Run Keyword If    '${REMOTE_URL}' != '${EMPTY}'    
+    ...    Open Browser    
+    ...    about:blank    
+    ...    browser=${BROWSER}    
+    ...    remote_url=${REMOTE_URL}    
+    ...    desired_capabilities=${capabilities}
+    ...    ELSE    
+    ...    Create Webdriver    Chrome    chrome_options=${options}
 
 Cleanup Calculator Environment
     Log    Cleaning up calculator test environment    console=True
