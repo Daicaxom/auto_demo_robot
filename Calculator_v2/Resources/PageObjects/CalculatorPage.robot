@@ -125,4 +125,6 @@ Setup Calculator Environment
     Call Method    ${options}    add_argument    --disable-gpu
     Call Method    ${options}    add_argument    --window-size=1920,1080
     
+    # Create and configure WebDriver
     Create Webdriver    Chrome    options=${options}
+    Set Window Size    1920    1080
