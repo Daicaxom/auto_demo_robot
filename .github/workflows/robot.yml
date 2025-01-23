@@ -19,6 +19,11 @@ jobs:
       with:
         persist-credentials: false
     
+    - name: Install system dependencies
+      run: |
+        apt-get update
+        apt-get install -y lsb-release software-properties-common
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
