@@ -20,9 +20,7 @@ var/
 *.egg
 
 # Robot Framework
-log.html
-output.xml
-report.html
+
 selenium-screenshot-*.png
 
 # IDE
