@@ -133,7 +133,7 @@ Setup Calculator Test Environment
     ...    remote_url=${REMOTE_URL}    
     ...    desired_capabilities=${capabilities}
     ...    ELSE    
-    ...    Create Webdriver    Chrome    chrome_options=${options}
+    ...    Create Webdriver    Chrome    options=${options}
 
 Cleanup Calculator Test Environment
     Log    Cleaning up calculator test environment    console=True

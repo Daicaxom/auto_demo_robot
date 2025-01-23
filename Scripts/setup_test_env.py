@@ -23,7 +23,7 @@ def create_directories():
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
 
-def get_chrome_options(headless=True):
+def get_options(headless=True):
     options = Options()
     if headless:
         options.add_argument('--headless=new')
