@@ -1,0 +1,32 @@
+test_users:
+  valid_users:
+    - username: test_user1
+      password: Test123!
+      role: user
+      status: active
+    - username: test_user2
+      password: Test456!
+      role: admin
+      status: active
+  
+  invalid_users:
+    - username: locked_user
+      password: Test789!
+      role: user
+      status: locked
+    - username: inactive_user
+      password: Test000!
+      role: user
+      status: inactive
+
+validation_rules:
+  password:
+    min_length: 8
+    max_length: 20
+    require_special_char: true
+    require_number: true
+    require_uppercase: true
+  username:
+    min_length: 4
+    max_length: 15
+    allowed_characters: "a-zA-Z0-9_-" 

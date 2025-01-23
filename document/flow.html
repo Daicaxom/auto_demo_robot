@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài liệu Flow Thực Thi Test Case Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            border-bottom: 3px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            border: 1px solid #e9ecef;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .layer-table {
+            width: 100%;
+            margin: 30px 0;
+        }
+        .layer-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .layer-table td {
+            vertical-align: top;
+        }
+        .flow-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .flow-diagram img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .diagram-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .responsive-img {
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            table {
+                font-size: 0.9em;
+            }
+            .flow-diagram img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tài liệu Flow Thực Thi Test Case Calculator </h1>
+
+    <h2>1. Cấu trúc Phân Tầng Keyword và File Thực Thi</h2>
+
+    <p>Automation framework cho Calculator được xây dựng theo cấu trúc phân tầng keyword, mỗi layer đảm nhận một vai trò cụ thể, tương ứng với các file trong dự án:</p>
+
+    <table class="layer-table">
+        <thead>
+            <tr>
+                <th>Layer</th>
+                <th>Mô tả</th>
+                <th>File Liên Quan</th>
+                <th>Ví dụ Keyword</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Spec Layer</b></td>
+                <td>Định nghĩa test case theo cú pháp Gherkin (Given/When/Then)</td>
+                <td><code>Calculator_v2/Tests/CalculatorTest.robot</code></td>
+                <td><code>Given Calculator is ready for input</code></td>
+            </tr>
+            <tr>
+                <td><b>Flow Layer</b></td>
+                <td>Xây dựng các business flow hoàn chỉnh từ các action đơn lẻ</td>
+                <td><code>Calculator_v2/Resources/TestFlows/CalculatorFlow.robot</code></td>
+                <td><code>Perform Addition Operation</code></td>
+            </tr>
+            <tr>
+                <td><b>POM Layer</b></td>
+                <td>Định nghĩa các element trên trang Calculator và các action cơ bản trên UI</td>
+                <td><code>Calculator_v2/Resources/PageObjects/CalculatorPage.robot</code></td>
+                <td><code>Click Number</code>, <code>Get Display Value</code></td>
+            </tr>
+            <tr>
+                <td><b>Data Layer</b></td>
+                <td>Quản lý và sinh dữ liệu test</td>
+                <td><code>Calculator_v2/Resources/TestData/</code></td>
+                <td><code>Generate Basic Operation Data</code>, <code>generate_numbers</code></td>
+            </tr>
+            <tr>
+                <td><b>Core Layer</b></td>
+                <td>Các keyword cơ bản từ SeleniumLibrary và custom keywords chung</td>
+                <td><code>UserStories/Common/Resources/Keywords/</code></td>
+                <td><code>Wait Until Element Is Visible</code>, <code>Wait And Click</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. Sơ đồ Flow Thực Thi Test Case</h2>
+
+    <div class="flow-diagram">
+        <img src="../images/Untitled diagram-2025-01-23-061516.png" alt="Flow diagram showing test execution layers" class="responsive-img">
+        <p class="diagram-caption">Sơ đồ minh họa luồng thực thi giữa các layer trong framework</p>
+    </div>
+
+    
+    </div>
+
+    <h2>3. Chi Tiết Flow Thực Thi Test Case "User can perform basic integer addition"</h2>
+
+    <p>Khi test case "User can perform basic integer addition" được thực thi, flow diễn ra như sau:</p>
+
+    <ol>
+        <li><b>CalculatorTest.robot (Spec Layer):</b> Test case bắt đầu chạy.
+            <ul>
+                <li><b>Suite Setup:</b> <code>Setup Calculator Environment</code> được gọi, thiết lập môi trường test (ví dụ: set timeout).</li>
+                <li><b>Test Setup:</b> <code>Initialize Calculator Session</code> được gọi, mở trình duyệt và truy cập trang Calculator.</li>
+                <li><b>Test Case "User can perform basic integer addition"</b>:
+                    <ul>
+                        <li><b>Given Step:</b> <code>Calculator is ready for input</code> được gọi.
+                            <ul>
+                                <li>Gọi keyword <code>Clear Display</code> từ <code>CalculatorFlow.robot</code> (Flow Layer).
+                                    <ul>
+                                        <li>Gọi keyword <code>Click All Clear</code> từ <code>CalculatorPage.robot</code> (POM Layer).
+                                            <ul>
+                                                <li>Gọi keyword <code>Click Element</code> từ <code>SeleniumLibrary</code> (Core Layer) để click vào nút "AC" trên UI.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Gọi keyword <code>Verify Display Shows "0"</code> từ <code>CalculatorFlow.robot</code> (Flow Layer).
+                                            <ul>
+                                                <li>Gọi keyword <code>Wait Until Display Shows "0"</code> từ <code>CalculatorPage.robot</code> (POM Layer) để kiểm tra display.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><b>When Step:</b> <code>User generates test data for basic operation min=1 max=100 use_decimals=${FALSE}</code> được gọi.
+                            <ul>
+                                <li>Gọi keyword <code>Generate Basic Operation Data</code> từ <code>CalculatorData.robot</code> (Data Layer).
+                                    <ul>
+                                        <li>Keyword này sử dụng <code>calculator_data_generator.py</code> để sinh dữ liệu số nguyên ngẫu nhiên (Data Layer).</li>
+                                        <li>Dữ liệu sinh ra (num1, num2, expected_addition, expected_multiplication) được lưu vào biến <code>${TEST_DATA}</code>.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><b>And Step:</b> <code>User performs addition operation with generated numbers</code> được gọi.
+                            <ul>
+                                <li>Gọi keyword <code>Perform Addition Operation</code> từ <code>CalculatorFlow.robot</code> (Flow Layer), truyền vào <code>${TEST_DATA}[num1]</code> và <code>${TEST_DATA}[num2]</code>.
+                                    <ul>
+                                        <li>Keyword <code>Perform Addition Operation</code> thực hiện các bước sau:
+                                            <ul>
+                                                <li>Gọi keyword <code>Enter Number</code> từ <code>CalculatorFlow.robot</code> (Flow Layer) để nhập số thứ nhất.
+                                                    <ul>
+                                                        <li>Keyword <code>Enter Number</code> xử lý việc chuyển đổi số thành chuỗi và click các nút số tương ứng trên Calculator (sử dụng <code>Click Number</code> từ POM Layer).</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Gọi keyword <code>Press Addition Operator</code> từ <code>CalculatorFlow.robot</code> (Flow Layer).
+                                                    <ul>
+                                                        <li>Gọi keyword <code>Click Plus</code> từ <code>CalculatorPage.robot</code> (POM Layer) để click nút "+".</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Gọi keyword <code>Enter Number</code> từ <code>CalculatorFlow.robot</code> (Flow Layer) để nhập số thứ hai.</li>
+                                                <li>Gọi keyword <code>Press Equals</code> từ <code>CalculatorFlow.robot</code> (Flow Layer).
+                                                    <ul>
+                                                        <li>Gọi keyword <code>Click Equals</code> từ <code>CalculatorPage.robot</code> (POM Layer) để click nút "=".</li>
+                                                        <li>Gọi keyword <code>Get Display Value</code> từ <code>CalculatorPage.robot</code> (POM Layer) để lấy kết quả hiển thị trên Calculator.</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Kết quả phép cộng được lưu vào biến <code>${ACTUAL_RESULT}</code>.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><b>Then Step:</b> <code>Result should match expected addition value</code> được gọi.
+                            <ul>
+                                <li>Gọi keyword <code>Verify Calculation Result</code> từ <code>CalculatorFlow.robot</code> (Flow Layer), truyền vào <code>${TEST_DATA}[expected_addition]</code>.
+                                    <ul>
+                                        <li>Keyword <code>Verify Calculation Result</code> thực hiện:
+                                            <ul>
+                                                <li>Gọi keyword <code>Get Display Value</code> từ <code>CalculatorPage.robot</code> (POM Layer) để lấy kết quả hiển thị trên Calculator (lần nữa để đảm bảo giá trị đã ổn định).</li>
+                                                <li>Gọi keyword <code>Should Be Equal As Numbers</code> từ <code>CalculatorFlow.robot</code> (Flow Layer) để so sánh <code>${ACTUAL_RESULT}</code> và <code>${TEST_DATA}[expected_addition]</code> (chuyển đổi cả hai về dạng số để so sánh chính xác).</li>
+                                                <li>Keyword <code>Should Be Equal As Numbers</code> sử dụng keyword <code>Should Be Equal As Numbers</code> từ <code>BuiltIn</code> (Core Layer) để thực hiện so sánh số học.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><b>Test Teardown:</b> <code>Cleanup Calculator Session</code> được gọi, đóng trình duyệt.</li>
+                <li><b>Suite Teardown:</b> <code>Cleanup Calculator Environment</code> được gọi, dọn dẹp môi trường test (ví dụ: đóng kết nối database nếu có).</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>4. Lợi ích của Cấu trúc Phân Tầng và Flow Thực Thi</h2>
+
+    <ul>
+        <li><b>Rõ ràng và dễ hiểu:</b> Cấu trúc phân tầng giúp test case dễ đọc, dễ hiểu và dễ maintain.</li>
+        <li><b>Tái sử dụng cao:</b> Các keyword ở layer dưới (POM, Flow) có thể tái sử dụng trong nhiều test case khác nhau.</li>
+        <li><b>Dễ bảo trì:</b> Khi UI thay đổi, chỉ cần sửa đổi ở POM Layer. Khi business flow thay đổi, sửa đổi ở Flow Layer. Test cases (Spec Layer) ít bị ảnh hưởng.</li>
+        <li><b>Phân chia trách nhiệm:</b> Mỗi layer có trách nhiệm riêng, giúp team làm việc hiệu quả hơn.</li>
+        <li><b>Mở rộng dễ dàng:</b> Dễ dàng thêm test case mới, flow mới, hoặc page object mới mà không ảnh hưởng đến cấu trúc tổng thể.</li>
+    </ul>
+
+    <p>Tài liệu này cung cấp một cái nhìn toàn diện về flow thực thi test case trong dự án Calculator, từ cấu trúc phân tầng keyword đến chi tiết thực thi của một test case cụ thể</p>
+
+</body>
+</html>

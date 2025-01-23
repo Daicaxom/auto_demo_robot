@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Cài Đặt Robot Framework</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            border-bottom: 3px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 2em;
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            border: 1px solid #e9ecef;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .layer-table {
+            width: 100%;
+            margin: 30px 0;
+        }
+        .layer-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .layer-table td {
+            vertical-align: top;
+        }
+        .flow-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .flow-diagram img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .diagram-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .responsive-img {
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            table {
+                font-size: 0.9em;
+            }
+            .flow-diagram img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hướng Dẫn Cài Đặt Robot Framework và Thư Viện</h1>
+
+    <p>Hướng dẫn này sẽ giúp bạn cài đặt Robot Framework và các thư viện cần thiết để bắt đầu viết các test case tự động hóa.</p>
+
+    <h2>1. Điều Kiện Tiên Quyết</h2>
+
+    <p>Trước khi cài đặt Robot Framework, bạn cần đảm bảo rằng hệ thống của bạn đã cài đặt Python và pip. </p>
+
+    <h3>1.1. Kiểm tra Python</h3>
+    <p>Mở terminal (hoặc Command Prompt trên Windows) và chạy lệnh sau để kiểm tra xem Python đã được cài đặt chưa:</p>
+    <pre><code>python --version
+# hoặc
+python3 --version
+</code></pre>
+    <p>Nếu Python đã được cài đặt, bạn sẽ thấy phiên bản Python được hiển thị. Nếu chưa, bạn cần tải và cài đặt Python từ <a href="https://www.python.org/downloads/">trang web chính thức của Python</a>.</p>
+
+    <h3>1.2. Kiểm tra pip</h3>
+    <p>Pip là trình quản lý gói cho Python, được sử dụng để cài đặt và quản lý các thư viện Python. Kiểm tra pip bằng lệnh:</p>
+    <pre><code>pip --version
+# hoặc
+pip3 --version
+</code></pre>
+    <p>Nếu pip chưa được cài đặt, bạn có thể cài đặt nó bằng cách chạy lệnh sau trong terminal:</p>
+    <pre><code># Đảm bảo bạn đã cài đặt Python trước khi chạy lệnh này
+python -m ensurepip --default-pip
+# hoặc (nếu python là python3)
+python3 -m ensurepip --default-pip
+</code></pre>
+
+    <h2>2. Cài Đặt Robot Framework</h2>
+
+    <p>Sau khi đã cài đặt Python và pip, bạn có thể cài đặt Robot Framework bằng lệnh pip:</p>
+    <pre><code>pip install robotframework
+# hoặc
+pip3 install robotframework
+</code></pre>
+    <p>Sau khi cài đặt thành công, bạn có thể kiểm tra phiên bản Robot Framework bằng lệnh:</p>
+    <pre><code>robot --version
+</code></pre>
+
+    <h2>3. Cài Đặt Các Thư Viện Robot Framework Quan Trọng</h2>
+
+    <p>Để sử dụng Robot Framework cho các mục đích khác nhau như kiểm thử web, API, và database, bạn cần cài đặt thêm các thư viện tương ứng. Dưới đây là một số thư viện phổ biến và cách cài đặt chúng:</p>
+
+    <h3>3.1. SeleniumLibrary (Kiểm thử Web)</h3>
+    <p>SeleniumLibrary là thư viện mạnh mẽ để tự động hóa trình duyệt web.</p>
+    <pre><code>pip install robotframework-seleniumlibrary
+# hoặc
+pip3 install robotframework-seleniumlibrary
+</code></pre>
+
+    <h3>3.2. RequestsLibrary (Kiểm thử API)</h3>
+    <p>RequestsLibrary giúp bạn thực hiện các kiểm thử API dễ dàng.</p>
+    <pre><code>pip install robotframework-requests
+# hoặc
+pip3 install robotframework-requests
+</code></pre>
+
+    <h3>3.3. DatabaseLibrary (Kiểm thử Database)</h3>
+    <p>DatabaseLibrary cho phép bạn tương tác và kiểm thử cơ sở dữ liệu.</p>
+    <pre><code>pip install robotframework-databaselibrary
+# hoặc
+pip3 install robotframework-databaselibrary
+</code></pre>
+
+    <h3>3.4. Các thư viện khác (tùy chọn)</h3>
+    <p>Bạn có thể cài đặt thêm các thư viện khác tùy theo nhu cầu dự án của bạn. Ví dụ:</p>
+    <ul>
+        <li><b>Faker:</b> Sinh dữ liệu giả mạo cho test. <code>pip install Faker</code></li>
+        <li><b>PyYAML:</b> Xử lý file YAML. <code>pip install PyYAML</code></li>
+        <li><b>webdrivermanager:</b> Quản lý driver cho trình duyệt web. <code>pip install webdrivermanager</code></li>
+        <li><b>robotframework-metrics:</b> Tạo báo cáo metrics cho Robot Framework. <code>pip install robotframework-metrics</code></li>
+        <li><b>pymysql hoặc mysql-connector-python:</b> Kết nối đến MySQL database. <code>pip install pymysql</code> hoặc <code>pip install mysql-connector-python</code></li>
+    </ul>
+
+    <p>Bạn có thể cài đặt tất cả các thư viện cần thiết cùng một lúc bằng cách sử dụng file <code>requirements.txt</code> (nếu có):</p>
+    <pre><code>pip install -r requirements.txt
+# hoặc
+pip3 install -r requirements.txt
+</code></pre>
+
+    <h2>4. Xác Minh Cài Đặt</h2>
+
+    <p>Sau khi cài đặt Robot Framework và các thư viện, bạn nên xác minh rằng mọi thứ đã được cài đặt đúng cách. Bạn có thể tạo một file test đơn giản (ví dụ: <code>verify_install.robot</code>) với nội dung sau:</p>
+
+    <pre><code language="robotframework">***Settings***
+Library    SeleniumLibrary
+
+***Test Cases***
+Verify Robot Framework Installation
+    Log To Console    Robot Framework đã được cài đặt thành công!
+    Open Browser    https://www.google.com    chrome
+    Close Browser
+</code></pre>
+
+    <p>Sau đó, chạy test case này bằng lệnh:</p>
+    <pre><code>robot verify_install.robot
+</code></pre>
+
+    <p>Nếu test case chạy thành công, bạn sẽ thấy thông báo "Robot Framework đã được cài đặt thành công!" trong console và một trình duyệt Chrome sẽ mở ra và đóng lại. Điều này xác nhận rằng Robot Framework và SeleniumLibrary đã được cài đặt và hoạt động bình thường.</p>
+
+    <p>Chúc mừng bạn đã cài đặt thành công Robot Framework và các thư viện cần thiết! Bây giờ bạn có thể bắt đầu xây dựng các kịch bản kiểm thử tự động hóa của mình.</p>
+
+</body>
+</html> 

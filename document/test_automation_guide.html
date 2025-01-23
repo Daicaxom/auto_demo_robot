@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chi Tiết Viết Test Automation</title>
+    <style>
+        /* Sử dụng lại các style từ flow.html */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        /* ... các style khác ... */
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .step-number {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng Dẫn Chi Tiết Viết Test Automation</h1>
+
+    <h2>Mục Lục</h2>
+    <ol>
+        <li><a href="#preparation">Chuẩn bị môi trường</a></li>
+        <li><a href="#katalon">Sử dụng Katalon Recorder</a></li>
+        <li><a href="#manual-to-automation">Chuyển đổi Manual Test Case sang Automation</a></li>
+        <li><a href="#writing-test">Viết Code Test</a></li>
+        <li><a href="#best-practices">Best Practices và Tips</a></li>
+    </ol>
+
+    <h2 id="preparation">1. Chuẩn bị môi trường</h2>
+    
+    <h3>1.1. Cài đặt công cụ cần thiết</h3>
+    <ul>
+        <li>Python (version 3.8 trở lên)</li>
+        <li>Robot Framework: <code>pip install robotframework</code></li>
+        <li>SeleniumLibrary: <code>pip install robotframework-seleniumlibrary</code></li>
+        <li>WebDriver cho Chrome/Firefox</li>
+        <li>IDE (Visual Studio Code với Robot Framework Language Server)</li>
+        <li>Katalon Recorder (Extension cho Chrome/Firefox)</li>
+    </ul>
+
+    <div class="tip">
+        <strong>Tip:</strong> Sử dụng Visual Studio Code với các extension sau để có trải nghiệm tốt nhất:
+        <ul>
+            <li>Robot Framework Language Server</li>
+            <li>Robot Framework Intellisense</li>
+            <li>Material Icon Theme</li>
+        </ul>
+    </div>
+
+    <h3>1.2. Cấu trúc thư mục dự án</h3>
+    <pre>
+Calculator_v2/
+├── Tests/
+│   └── CalculatorTest.robot
+├── Resources/
+│   ├── TestFlows/
+│   │   └── CalculatorFlow.robot
+│   ├── PageObjects/
+│   │   └── CalculatorPage.robot
+│   └── TestData/
+│       └── calculator_data_generator.py
+└── Results/
+    </pre>
+
+    <h2 id="katalon">2. Sử dụng Katalon Recorder</h2>
+
+    <h3>2.1. Cài đặt và cấu hình Katalon Recorder</h3>
+    <ol>
+        <li>Truy cập Chrome Web Store hoặc Firefox Add-ons</li>
+        <li>Tìm kiếm "Katalon Recorder"</li>
+        <li>Cài đặt extension</li>
+        <li>Khởi động lại trình duyệt</li>
+    </ol>
+
+    <h3>2.2. Thu thập Locator với Katalon Recorder</h3>
+    <ol>
+        <li>Mở Katalon Recorder và truy cập trang Calculator</li>
+        <li>Click nút "Record" trên Katalon Recorder</li>
+        <li>Thực hiện các thao tác trên Calculator:
+            <ul>
+                <li>Click vào các nút số</li>
+                <li>Click vào các nút phép tính</li>
+                <li>Click vào nút bằng (=)</li>
+            </ul>
+        </li>
+        <li>Dừng ghi và xem các locator được thu thập</li>
+    </ol>
+
+    <div class="code-example">
+        <p>Ví dụ về các locator thu được:</p>
+        <pre>
+xpath=//button[@data-number='1']  // Nút số 1
+css=button[data-operator='+']     // Nút cộng
+id=display                        // Màn hình hiển thị
+        </pre>
+    </div>
+
+    <h3>2.3. Tối ưu hóa Locator</h3>
+    <p>Sau khi thu thập locator, cần tối ưu hóa chúng theo các nguyên tắc:</p>
+    <ul>
+        <li>Ưu tiên sử dụng ID nếu có</li>
+        <li>Sử dụng CSS Selector cho các element đơn giản</li>
+        <li>Sử dụng XPath cho các element phức tạp hoặc động</li>
+        <li>Tránh sử dụng locator dựa trên index hoặc text content</li>
+    </ul>
+
+    <h2 id="manual-to-automation">3. Chuyển đổi Manual Test Case sang Automation</h2>
+
+    <h3>3.1. Phân tích Manual Test Case</h3>
+    <div class="code-example">
+        <p>Ví dụ Manual Test Case:</p>
+        <pre>
+Test Case: Phép cộng hai số nguyên
+Mục đích: Kiểm tra tính năng cộng hai số nguyên
+Các bước thực hiện:
+1. Mở Calculator
+2. Nhập số thứ nhất (vd: 5)
+3. Click nút cộng (+)
+4. Nhập số thứ hai (vd: 7)
+5. Click nút bằng (=)
+Kết quả mong đợi: Màn hình hiển thị kết quả 12
+        </pre>
+    </div>
+
+    <h3>3.2. Chuyển đổi sang Gherkin Format</h3>
+    <div class="code-example">
+        <pre>
+*** Test Cases ***
+User can perform basic integer addition
+    [Documentation]    Test addition operation with two integers
+    [Tags]    calculator    addition    smoke
+    Given Calculator is ready for input
+    When User generates test data for basic operation min=1 max=100 use_decimals=${FALSE}
+    And User performs addition operation with generated numbers
+    Then Result should match expected addition value
+        </pre>
+    </div>
+
+    <h2 id="writing-test">4. Viết Code Test</h2>
+
+    <h3>4.1. Page Object Model (CalculatorPage.robot)</h3>
+    <div class="code-example">
+        <pre>
+*** Variables ***
+${CALCULATOR_URL}    http://localhost:8080/calculator
+${DISPLAY}          id=display
+${BTN_TEMPLATE}     xpath=//button[@data-number='{}']
+${OP_TEMPLATE}      css=button[data-operator='{}']
+${EQUALS_BTN}       css=button.equals
+${CLEAR_BTN}        css=button.clear
+
+*** Keywords ***
+Open Calculator
+    Open Browser    ${CALCULATOR_URL}    chrome
+    Maximize Browser Window
+
+Click Number
+    [Arguments]    ${number}
+    ${locator}=    Format String    ${BTN_TEMPLATE}    ${number}
+    Wait And Click    ${locator}
+
+Click Operator
+    [Arguments]    ${operator}
+    ${locator}=    Format String    ${OP_TEMPLATE}    ${operator}
+    Wait And Click    ${locator}
+
+Get Display Value
+    ${value}=    Get Text    ${DISPLAY}
+    [Return]    ${value}
+        </pre>
+    </div>
+
+    <h3>4.2. Flow Layer (CalculatorFlow.robot)</h3>
+    <div class="code-example">
+        <pre>
+*** Keywords ***
+Calculator is ready for input
+    Open Calculator
+    Clear Display
+    Verify Display Shows "0"
+
+Generate Basic Operation Data
+    [Arguments]    ${min}=1    ${max}=100    ${use_decimals}=${FALSE}
+    ${data}=    Generate Test Data    ${min}    ${max}    ${use_decimals}
+    Set Test Variable    ${TEST_DATA}    ${data}
+
+Perform Addition Operation
+    [Arguments]    ${num1}    ${num2}
+    Enter Number    ${num1}
+    Click Operator    +
+    Enter Number    ${num2}
+    Click Equals
+    ${result}=    Get Display Value
+    Set Test Variable    ${ACTUAL_RESULT}    ${result}
+        </pre>
+    </div>
+
+    <h3>4.3. Test Spec (CalculatorTest.robot)</h3>
+    <div class="code-example">
+        <pre>
+*** Settings ***
+Resource          ../Resources/TestFlows/CalculatorFlow.robot
+Test Setup        Initialize Calculator Session
+Test Teardown     Close Browser
+
+*** Test Cases ***
+User can perform basic integer addition
+    [Tags]    calculator    addition    smoke
+    Given Calculator is ready for input
+    When User generates test data for basic operation min=1 max=100 use_decimals=${FALSE}
+    And User performs addition operation with generated numbers
+    Then Result should match expected addition value
+        </pre>
+    </div>
+
+    <h2 id="best-practices">5. Best Practices và Tips</h2>
+
+    <h3>5.1. Naming Conventions</h3>
+    <ul>
+        <li>Test Cases: Sử dụng câu đầy đủ, mô tả rõ mục đích test</li>
+        <li>Keywords: Sử dụng động từ ở đầu (Click, Enter, Verify, etc.)</li>
+        <li>Variables: Viết hoa, phân cách bằng dấu gạch dưới</li>
+    </ul>
+
+    <h3>5.2. Error Handling</h3>
+    <div class="code-example">
+        <pre>
+*** Keywords ***
+Wait And Click
+    [Arguments]    ${locator}    ${timeout}=10s
+    Wait Until Element Is Visible    ${locator}    ${timeout}
+    Wait Until Element Is Enabled    ${locator}    ${timeout}
+    Click Element    ${locator}
+        </pre>
+    </div>
+
+    <h3>5.3. Logging và Reporting</h3>
+    <ul>
+        <li>Sử dụng [Documentation] cho mỗi test case</li>
+        <li>Thêm log messages cho các bước quan trọng</li>
+        <li>Sử dụng tags để phân loại test cases</li>
+    </ul>
+
+    <div class="tip">
+        <strong>Tip:</strong> Chạy test với các tham số hữu ích:
+        <pre>robot --outputdir Results --timestampoutputs --listener allure_robotframework ./Tests</pre>
+    </div>
+
+    <h3>5.4. Debugging Tips</h3>
+    <ul>
+        <li>Sử dụng keyword Debug để dừng execution tại điểm cần kiểm tra</li>
+        <li>Thêm Screenshot trong trường hợp fail</li>
+        <li>Sử dụng biến ${BROWSER} với giá trị chrome:True để mở DevTools</li>
+    </ul>
+
+    <div class="warning">
+        <strong>Lưu ý:</strong> 
+        <ul>
+            <li>Luôn kiểm tra locator có ổn định không trước khi sử dụng</li>
+            <li>Tránh hard-code test data trong test cases</li>
+            <li>Đảm bảo test cases độc lập với nhau</li>
+        </ul>
+    </div>
+
+</body>
+</html>
