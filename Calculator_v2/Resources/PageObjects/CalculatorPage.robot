@@ -114,39 +114,15 @@ Clear Display
 # Setup and Teardown
 Setup Calculator Environment
     Log    Setting up calculator test environment    console=True
-    
-    # Cleanup existing Chrome processes and user data
-    Run Process    pkill    -f    chrome    shell=True
-    Run Process    rm    -rf    /tmp/chrome*    shell=True
-    Sleep    2s
-    
     Set Selenium Timeout    ${TIMEOUT}
     
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     
-    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
+    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless=new
     
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
     Call Method    ${options}    add_argument    --disable-gpu
     Call Method    ${options}    add_argument    --window-size=1920,1080
-    Call Method    ${options}    add_argument    --incognito
-    Call Method    ${options}    add_argument    --disable-extensions
-    Call Method    ${options}    add_argument    --disable-popup-blocking
     
-    # Force a temporary directory that will be cleaned up automatically
-    ${temp_dir}=    Set Variable    /tmp/chrome_temp_${TEST NAME}
-    Remove Directory    ${temp_dir}    recursive=True
-    Create Directory    ${temp_dir}
-    Call Method    ${options}    add_argument    --user-data-dir=${temp_dir}
-    
-    ${capabilities}=    Call Method    ${options}    to_capabilities
-    
-    Run Keyword If    '${REMOTE_URL}' != '${EMPTY}'    
-    ...    Open Browser    
-    ...    about:blank    
-    ...    browser=${BROWSER}    
-    ...    remote_url=${REMOTE_URL}    
-    ...    desired_capabilities=${capabilities}
-    ...    ELSE    
-    ...    Create Webdriver    Chrome    options=${options}
+    Create Webdriver    Chrome    options=${options}
