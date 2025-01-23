@@ -118,12 +118,18 @@ Setup Calculator Environment
     
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     
-    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless=new
+    # Create unique temp directory for this run
+    ${timestamp}=    Evaluate    str(int(time.time()))    time
+    ${temp_dir}=    Set Variable    /tmp/chrome_${timestamp}
+    Create Directory    ${temp_dir}
     
+    # Add Chrome options
+    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless=new
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
     Call Method    ${options}    add_argument    --disable-gpu
     Call Method    ${options}    add_argument    --window-size=1920,1080
+    Call Method    ${options}    add_argument    --user-data-dir\=${temp_dir}
     
     # Create and configure WebDriver
     Create Webdriver    Chrome    options=${options}
