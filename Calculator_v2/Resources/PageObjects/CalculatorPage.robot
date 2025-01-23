@@ -107,3 +107,30 @@ Clear Display
     Wait Until Element Is Visible    ${CLEAR_BTN}    ${TIMEOUT}
     Click Element    ${CLEAR_BTN}
     Verify Display Shows    ${DEFAULT_VALUE}
+
+# Setup and Teardown
+Setup Calculator Environment
+    Log    Setting up calculator test environment    console=True
+    Set Selenium Timeout    ${TIMEOUT}
+    
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    
+    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
+    
+    # Add unique user data directory
+    ${timestamp}=    Get Time    epoch
+    Call Method    ${options}    add_argument    --user-data-dir=/tmp/chrome_profile_${timestamp}
+    
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    
+    ${capabilities}=    Call Method    ${options}    to_capabilities
+    
+    Run Keyword If    '${REMOTE_URL}' != '${EMPTY}'    
+    ...    Open Browser    
+    ...    about:blank    
+    ...    browser=${BROWSER}    
+    ...    remote_url=${REMOTE_URL}    
+    ...    desired_capabilities=${capabilities}
+    ...    ELSE    
+    ...    Create Webdriver    Chrome    options=${options}
