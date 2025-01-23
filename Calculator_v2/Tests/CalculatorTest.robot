@@ -12,7 +12,7 @@ Test Teardown    Cleanup Calculator Session
 *** Variables ***
 ${TIMEOUT}    10s
 ${HEADLESS}    ${TRUE}
-
+${REMOTE_URL}    ${EMPTY}
 *** Test Cases ***
 User can perform basic integer addition
     [Documentation]    Verify that calculator can perform basic addition with integers
