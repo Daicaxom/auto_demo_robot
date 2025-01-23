@@ -2,15 +2,13 @@ import os
 import sys
 import argparse
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
 def setup_webdrivers():
-    """Download and setup WebDrivers"""
+    """Download and setup WebDriver"""
     ChromeDriverManager().install()
-    GeckoDriverManager().install()
 
 def create_directories():
     """Create necessary directories"""
@@ -49,4 +47,4 @@ def main():
     print("Setup completed successfully!")
 
 if __name__ == "__main__":
-    main() 
+    print("Chrome WebDriver setup completed successfully!") 

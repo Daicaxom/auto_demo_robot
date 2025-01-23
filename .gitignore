@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
+*$py.class
 *.so
 .Python
 env/
@@ -20,8 +21,15 @@ var/
 *.egg
 
 # Robot Framework
-
+log.html
+output.xml
+report.html
 selenium-screenshot-*.png
+reports/
+Results/
+Screenshots/
+Downloads/
+Logs/
 
 # IDE
 .idea/
@@ -29,12 +37,10 @@ selenium-screenshot-*.png
 *.swp
 *.swo
 
-# Test artifacts
-Results/
-Screenshots/
-Downloads/
-Logs/
-config/
+# Virtual Environment
+venv/
+ENV/
 
-# Environment
-.env 
+# Chrome Driver
+chromedriver
+chromedriver.exe 

@@ -1,22 +1,15 @@
-# Core Framework
+# Core packages for running tests
 robotframework==6.1.1
-robotframework-seleniumlibrary==6.1.0
-robotframework-requests==0.9.5
-robotframework-databaselibrary==1.4.0
+robotframework-seleniumlibrary==6.1.3
+selenium==4.16.0
+webdriver-manager==4.0.1
 
-# Test Data Generation
-Faker==33.3.1
-PyYAML==6.0.1
-
-# Drivers
-webdrivermanager==4.0.2
-
-# API Testing
-requests==2.31.0
-
-# Database
-pymysql==1.1.0
-
-# Reporting
-robotframework-metrics==3.3.3
-mysql-connector-python==9.2.0
+# Optional packages for local development
+# robotframework-requests==0.9.5
+# robotframework-databaselibrary==1.4.0
+# Faker==33.3.1
+# PyYAML==6.0.1
+# requests==2.31.0
+# pymysql==1.1.0
+# robotframework-metrics==3.3.3
+# mysql-connector-python==9.2.0
