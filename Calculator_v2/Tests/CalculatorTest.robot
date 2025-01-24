@@ -3,7 +3,7 @@ Documentation     Test suite for calculator functionality using BDD approach
 Resource          ../Resources/PageObjects/CalculatorPage.robot
 Resource          ../Resources/TestFlows/CalculatorFlow.robot
 Resource          ../Resources/TestData/CalculatorData.robot
-Library           ../Scripts/chrome_manager.py
+Library           ../../Scripts/chrome_manager.py
 
 Suite Setup       Initialize Chrome Environment
 Suite Teardown    Cleanup Chrome Environment
