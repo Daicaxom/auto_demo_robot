@@ -145,8 +145,8 @@ Cleanup Calculator Environment
     # Close browsers
     Close All Browsers
     
-    # Cleanup temp directories
-    Run Keyword And Ignore Error    Remove Directory    /tmp/chrome_*    recursive=True
+    # Clean up temp directory if it exists
+    Run Keyword If    'CHROME_TEMP_DIR' in $SUITE    Remove Directory    ${CHROME_TEMP_DIR}    recursive=True
     
     Log    Calculator environment cleanup completed    console=True
 
