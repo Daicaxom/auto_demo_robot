@@ -3,10 +3,12 @@ import psutil
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from robot.api.deco import keyword
 
 class ChromeManager:
     ROBOT_LIBRARY_SCOPE = 'SUITE'
     
+    @keyword('Get Instance')
     @classmethod
     def get_instance(cls):
         """Create and return a ChromeManager instance for Robot Framework"""
