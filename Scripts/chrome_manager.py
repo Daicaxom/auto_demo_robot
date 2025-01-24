@@ -5,6 +5,13 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 class ChromeManager:
+    ROBOT_LIBRARY_SCOPE = 'SUITE'
+    
+    @classmethod
+    def get_instance(cls):
+        """Create and return a ChromeManager instance for Robot Framework"""
+        return cls()
+        
     def __init__(self):
         self.driver = None
         self.profile_dir = None

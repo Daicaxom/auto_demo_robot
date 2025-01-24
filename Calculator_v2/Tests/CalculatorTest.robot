@@ -115,7 +115,7 @@ Result should match expected memory operation value
 
 # Setup and Teardown
 Initialize Chrome Environment
-    ${chrome_manager}=    ChromeManager
+    ${chrome_manager}=    Get Instance
     Set Suite Variable    ${CHROME_MANAGER}    ${chrome_manager}
     ${driver}=    Call Method    ${CHROME_MANAGER}    create_driver    headless=${HEADLESS}
     Set Suite Variable    ${DRIVER}    ${driver}
