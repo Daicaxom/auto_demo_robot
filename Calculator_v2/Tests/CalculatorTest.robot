@@ -3,9 +3,10 @@ Documentation     Test suite for calculator functionality using BDD approach
 Resource          ../Resources/PageObjects/CalculatorPage.robot
 Resource          ../Resources/TestFlows/CalculatorFlow.robot
 Resource          ../Resources/TestData/CalculatorData.robot
+Library           ../Scripts/chrome_manager.py
 
-Suite Setup       Setup Calculator Environment
-Suite Teardown    Cleanup Calculator Environment
+Suite Setup       Initialize Chrome Environment
+Suite Teardown    Cleanup Chrome Environment
 Test Setup       Initialize Calculator Session
 Test Teardown    Cleanup Calculator Session
 
@@ -113,42 +114,23 @@ Result should match expected memory operation value
     Verify Calculation Result    ${TEST_DATA}[expected_result]
 
 # Setup and Teardown
-Setup Calculator Environment
-    Log    Setting up calculator test environment    console=True
-    Set Selenium Timeout    ${TIMEOUT}
-    
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    
-    Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless
-    
-    Call Method    ${options}    add_argument    --no-sandbox
-    Call Method    ${options}    add_argument    --disable-dev-shm-usage
-    
-    ${capabilities}=    Call Method    ${options}    to_capabilities
-    
-    Run Keyword If    '${REMOTE_URL}' != '${EMPTY}'    
-    ...    Open Browser    
-    ...    about:blank    
-    ...    browser=${BROWSER}    
-    ...    remote_url=${REMOTE_URL}    
-    ...    desired_capabilities=${capabilities}
-    ...    ELSE    
-    ...    Create Webdriver    Chrome    options=${options}
+Initialize Chrome Environment
+    ${chrome_manager}=    ChromeManager
+    Set Suite Variable    ${CHROME_MANAGER}    ${chrome_manager}
+    ${driver}=    Call Method    ${CHROME_MANAGER}    create_driver    headless=${HEADLESS}
+    Set Suite Variable    ${DRIVER}    ${driver}
 
-Cleanup Calculator Environment
-    Log    Cleaning up calculator test environment    console=True
-    
-    # Kill any existing Chrome processes
-    Run Keyword And Ignore Error    Run Process    pkill    -9    chrome    shell=True
-    Run Keyword And Ignore Error    Run Process    pkill    -9    chromedriver    shell=True
-    
-    # Close browsers
-    Close All Browsers
-    
-    # Clean up temp directory if it exists
-    Run Keyword If    'CHROME_TEMP_DIR' in $SUITE    Remove Directory    ${CHROME_TEMP_DIR}    recursive=True
-    
-    Log    Calculator environment cleanup completed    console=True
+Cleanup Chrome Environment
+    Call Method    ${CHROME_MANAGER}    cleanup
+
+Initialize Calculator Session
+    Go To    ${CALCULATOR_URL}
+    Maximize Browser Window
+    Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}
+
+Cleanup Calculator Session
+    Run Keyword If Test Failed    Capture Page Screenshot
+    Go To    about:blank
 
 Log Test Execution Results
     Run Keyword If Test Failed    Capture Page Screenshot

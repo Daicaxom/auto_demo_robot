@@ -116,21 +116,27 @@ Setup Calculator Environment
     Log    Setting up calculator test environment    console=True
     Set Selenium Timeout    ${TIMEOUT}
     
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    
     # Create unique temp directory for this run
     ${timestamp}=    Evaluate    str(int(time.time()))    time
     ${temp_dir}=    Set Variable    /tmp/chrome_${timestamp}
     Create Directory    ${temp_dir}
     
     # Add Chrome options
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     Run Keyword If    ${HEADLESS}    Call Method    ${options}    add_argument    --headless=new
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
     Call Method    ${options}    add_argument    --disable-gpu
     Call Method    ${options}    add_argument    --window-size=1920,1080
     Call Method    ${options}    add_argument    --user-data-dir\=${temp_dir}
+    Call Method    ${options}    add_argument    --disable-software-rasterizer
+    Call Method    ${options}    add_argument    --no-zygote
+    Call Method    ${options}    add_argument    --single-process
+    Call Method    ${options}    add_argument    --disk-cache-dir=/dev/null
     
     # Create and configure WebDriver
     Create Webdriver    Chrome    options=${options}
     Set Window Size    1920    1080
+    
+    # Store temp dir for cleanup
+    Set Suite Variable    ${CHROME_TEMP_DIR}    ${temp_dir}
