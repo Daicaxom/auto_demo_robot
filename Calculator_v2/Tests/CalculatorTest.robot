@@ -137,7 +137,17 @@ Setup Calculator Environment
 
 Cleanup Calculator Environment
     Log    Cleaning up calculator test environment    console=True
+    
+    # Kill any existing Chrome processes
+    Run Keyword And Ignore Error    Run Process    pkill    -9    chrome    shell=True
+    Run Keyword And Ignore Error    Run Process    pkill    -9    chromedriver    shell=True
+    
+    # Close browsers
     Close All Browsers
+    
+    # Cleanup temp directories
+    Run Keyword And Ignore Error    Remove Directory    /tmp/chrome_*    recursive=True
+    
     Log    Calculator environment cleanup completed    console=True
 
 Log Test Execution Results
