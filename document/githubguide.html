@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Cài Đặt GitHub Actions cho Robot Framework</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng Dẫn Cài Đặt GitHub Actions cho Robot Framework</h1>
+
+    <h2>Mục Lục</h2>
+    <ol>
+        <li><a href="#prerequisites">Điều kiện tiên quyết</a></li>
+        <li><a href="#structure">Cấu trúc dự án</a></li>
+        <li><a href="#requirements">Cài đặt requirements.txt</a></li>
+        <li><a href="#workflow">Thiết lập GitHub Actions Workflow</a></li>
+        <li><a href="#verification">Xác minh và chạy thử</a></li>
+    </ol>
+
+    <h2 id="prerequisites">1. Điều kiện tiên quyết</h2>
+    <ul>
+        <li>Một repository GitHub chứa Robot Framework tests</li>
+        <li>Quyền admin hoặc write access đến repository</li>
+        <li>Đã cài đặt Git trên máy local</li>
+    </ul>
+
+    <h2 id="structure">2. Cấu trúc dự án</h2>
+    <p>Đảm bảo dự án của bạn có cấu trúc như sau:</p>
+    <pre>
+project_root/
+├── .github/
+│   └── workflows/
+│       └── robot.yml
+├── Calculator_v2/
+│   ├── Tests/
+│   │   └── CalculatorTest.robot
+│   └── Resources/
+│       └── PageObjects/
+│           └── CalculatorPage.robot
+├── requirements.txt
+└── README.md</pre>
+
+    <h2 id="requirements">3. Cài đặt requirements.txt</h2>
+    <p>Tạo file requirements.txt trong thư mục gốc với các dependency sau:</p>
+    <div class="code-example">
+        <pre>robotframework>=6.1.1
+robotframework-seleniumlibrary>=6.1.3
+robotframework-requests>=0.9.5
+selenium>=4.15.2
+webdrivermanager>=0.10.0
+robotframework-pabot>=2.16.0</pre>
+    </div>
+
+    <h2 id="workflow">4. Thiết lập GitHub Actions Workflow</h2>
+    
+    <h3>4.1. Tạo workflow file</h3>
+    <p>Tạo file <code>.github/workflows/robot.yml</code> với nội dung sau:</p>
+    <div class="code-example">
+        <p>Xem nội dung file robot.yml:</p>
+        <pre>
+Tham khảo file robot.yml ở trên (dòng 1-92)</pre>
+    </div>
+
+    <div class="note">
+        <strong>Lưu ý:</strong> File workflow này bao gồm:
+        <ul>
+            <li>Cài đặt Chrome và các dependencies cần thiết</li>
+            <li>Caching để tối ưu thời gian build</li>
+            <li>Cơ chế retry để xử lý các test flaky</li>
+            <li>Chạy tests trong môi trường headless</li>
+            <li>Upload test results dưới dạng artifacts</li>
+        </ul>
+    </div>
+
+    <h3>4.2. Cấu hình Secrets (nếu cần)</h3>
+    <p>Nếu tests của bạn cần các biến môi trường bí mật:</p>
+    <ol>
+        <li>Vào repository settings</li>
+        <li>Chọn Secrets and variables > Actions</li>
+        <li>Click "New repository secret"</li>
+        <li>Thêm các secrets cần thiết (ví dụ: TEST_USERNAME, TEST_PASSWORD)</li>
+    </ol>
+
+    <h2 id="verification">5. Xác minh và chạy thử</h2>
+    
+    <h3>5.1. Commit và push changes</h3>
+    <pre>git add .
+git commit -m "Add GitHub Actions workflow for Robot Framework tests"
+git push origin main</pre>
+
+    <h3>5.2. Kiểm tra workflow</h3>
+    <ol>
+        <li>Vào tab "Actions" trong repository GitHub</li>
+        <li>Chọn workflow "Robot Framework Tests"</li>
+        <li>Xem chi tiết build và test results</li>
+    </ol>
+
+    <div class="tip">
+        <strong>Tip:</strong> Để debug workflow:
+        <ul>
+            <li>Thêm step debug bằng cách set secret ACTIONS_RUNNER_DEBUG=true</li>
+            <li>Kiểm tra logs trong tab Actions</li>
+            <li>Tải về artifacts để xem test reports chi tiết</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <strong>Cảnh báo:</strong>
+        <ul>
+            <li>Đảm bảo tests có thể chạy trong môi trường headless</li>
+            <li>Xử lý timeout và retry một cách phù hợp</li>
+            <li>Cẩn thận với việc expose sensitive data trong logs</li>
+        </ul>
+    </div>
+
+</body>
+</html>
