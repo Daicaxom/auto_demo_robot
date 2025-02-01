@@ -26,8 +26,8 @@ Keywords cơ bản từ thư viện và custom base keywords
   - Ví dụ:
     ```robotframework
     Wait And Click Element    ${locator}
-        Wait Until Element Is Visible    ${locator}    ${DEFAULT_TIMEOUT}
-        Wait Until Element Is Enabled    ${locator}    ${DEFAULT_TIMEOUT}
+        Wait Until Element Is Visible    ${locator}    ${TIMEOUT}
+        Wait Until Element Is Enabled    ${locator}    ${TIMEOUT}
         Click Element    ${locator}
     ```
 

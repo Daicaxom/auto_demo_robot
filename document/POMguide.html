@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chi Tiết Viết Page Object Model (POM)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng Dẫn Chi Tiết Viết Page Object Model (POM)</h1>
+
+    <h2>Mục Lục</h2>
+    <ol>
+        <li><a href="#components">Thành phần cố định của POM</a></li>
+        <li><a href="#key-points">Các ý chính khi tạo POM</a></li>
+        <li><a href="#template">Template chuẩn cho POM</a></li>
+        <li><a href="#speedup">Tăng tốc việc viết POM</a></li>
+        <li><a href="#conclusion">Kết luận</a></li>
+    </ol>
+
+    <h2 id="components">1. Thành Phần Cố Định của POM</h2>
+    <div class="note">
+        <p>Mỗi file POM cần có các thành phần sau:</p>
+        <ul>
+            <li><strong>Documentation:</strong> Mô tả ngắn gọn về trang và vai trò của file POM</li>
+            <li><strong>Libraries:</strong> SeleniumLibrary và các thư viện hỗ trợ (String, Collections)</li>
+            <li><strong>Variables:</strong> URL trang, locators và giá trị mặc định</li>
+            <li><strong>Keywords:</strong> Các action cơ bản để thao tác với elements</li>
+        </ul>
+    </div>
+
+    <h2 id="key-points">2. Các Ý Chính Khi Tạo POM</h2>
+    
+    <h3>2.1. Xác Định Mục Đích và Phạm Vi</h3>
+    <ul>
+        <li>POM tương ứng với một trang cụ thể</li>
+        <li>Liệt kê các hành động chính người dùng có thể thực hiện</li>
+    </ul>
+
+    <h3>2.2. Variables Quan Trọng</h3>
+    <div class="code-example">
+        <pre>
+*** Variables ***
+${PAGE_URL}         https://example.com/page
+${DEFAULT_TIMEOUT}  20s
+
+# Locators
+${LOGIN_BUTTON}     id=login-btn
+${USERNAME_FIELD}   id=username
+${PASSWORD_FIELD}   id=password</pre>
+    </div>
+
+    <h3>2.3. Keywords Cơ Bản</h3>
+    <div class="tip">
+        <p>Các loại keyword cần có:</p>
+        <ul>
+            <li>Mở trang (Open Page)</li>
+            <li>Tương tác với element (Click, Input)</li>
+            <li>Kiểm tra trạng thái (Verify, Validate)</li>
+            <li>Lấy thông tin (Get Text, Get Value)</li>
+        </ul>
+    </div>
+
+    <h2 id="template">3. Template Chuẩn cho POM</h2>
+    <p>Sử dụng template sau làm khung sườn cho các file POM:</p>
+    <div class="code-example">
+        <pre>
+*** Settings ***
+Documentation     [Tên trang]: POM cho trang [Tên trang] với các thao tác cơ bản.
+Library           SeleniumLibrary
+Library           String
+Library           Collections
+
+*** Variables ***
+${PAGE_URL}       https://example.com/page-path
+# Các locators cơ bản
+${ELEMENT_X}      id=elementX_id
+${ELEMENT_Y}      css=.elementY_class
+${BUTTON_SUBMIT}  xpath=//button[@id='submit']
+
+# Timeout mặc định
+${DEFAULT_TIMEOUT}    20s
+
+*** Keywords ***
+Open Page
+    [Documentation]    Mở trình duyệt và truy cập trang ${PAGE_URL}.
+    Open Browser    ${PAGE_URL}    chrome
+    Maximize Browser Window
+
+Click Element X
+    [Documentation]    Click vào element X.
+    Wait Until Element Is Visible    ${ELEMENT_X}    ${DEFAULT_TIMEOUT}
+    Click Element    ${ELEMENT_X}
+
+Input Into Element Y
+    [Arguments]    ${text}
+    [Documentation]    Nhập text vào element Y.
+    Wait Until Element Is Visible    ${ELEMENT_Y}    ${DEFAULT_TIMEOUT}
+    Input Text    ${ELEMENT_Y}    ${text}
+
+Submit Form
+    [Documentation]    Click nút Submit của trang.
+    Wait Until Element Is Visible    ${BUTTON_SUBMIT}    ${DEFAULT_TIMEOUT}
+    Click Element    ${BUTTON_SUBMIT}
+
+Get Element X Text
+    [Documentation]    Lấy nội dung text của element X.
+    Wait Until Element Is Visible    ${ELEMENT_X}    ${DEFAULT_TIMEOUT}
+    ${text}=    Get Text    ${ELEMENT_X}
+    [Return]    ${text}</pre>
+    </div>
+
+    <h2 id="speedup">4. Tăng Tốc Việc Viết POM</h2>
+
+    <h3>4.1. Sử Dụng IDE và Snippets</h3>
+    <div class="tip">
+        <strong>Recommended Tools:</strong>
+        <ul>
+            <li>Visual Studio Code + Robot Framework Extension</li>
+            <li>Tạo snippets cá nhân từ template</li>
+            <li>Sử dụng auto-completion</li>
+        </ul>
+    </div>
+
+    <h3>4.2. Ghi Lại Locators Tự Động</h3>
+    <div class="note">
+        <strong>Tools hỗ trợ:</strong>
+        <ul>
+            <li>Katalon Recorder: Ghi lại các thao tác và locators</li>
+            <li>Chrome DevTools: Inspect elements và copy selectors</li>
+            <li>Selenium IDE: Record và export các thao tác</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <strong>Lưu ý khi chọn locator:</strong>
+        <ul>
+            <li>Ưu tiên sử dụng ID > CSS > XPath</li>
+            <li>Tránh sử dụng locator phụ thuộc vào text</li>
+            <li>Đảm bảo locator đủ unique và stable</li>
+        </ul>
+    </div>
+
+    <h3>4.3. Best Practices</h3>
+    <ul>
+        <li>Luôn sử dụng Wait Until Element Is Visible trước khi thao tác</li>
+        <li>Gom nhóm các locator liên quan</li>
+        <li>Đặt tên biến và keyword có ý nghĩa</li>
+        <li>Thêm Documentation cho mỗi keyword</li>
+    </ul>
+
+    <h2 id="conclusion">5. Kết Luận</h2>
+    <p>Việc tạo và duy trì một POM chuẩn giúp:</p>
+    <ul>
+        <li>Tăng tốc độ viết test</li>
+        <li>Dễ dàng bảo trì và cập nhật</li>
+        <li>Code có tính tái sử dụng cao</li>
+        <li>Giảm thiểu duplicate code</li>
+    </ul>
+
+    <div class="tip">
+        <strong>Pro Tips:</strong>
+        <ul>
+            <li>Tạo một thư viện các POM mẫu cho các loại trang phổ biến</li>
+            <li>Chia sẻ template và best practices với team</li>
+            <li>Review và cập nhật template định kỳ</li>
+        </ul>
+    </div>
+
+</body>
+</html>

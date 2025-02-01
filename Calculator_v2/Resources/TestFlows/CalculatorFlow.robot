@@ -16,60 +16,18 @@ Enter Number
         Run Keyword If    '${char}' == '.'    Click Decimal Point
         ...    ELSE    Click Number    ${char}
     END
-    Sleep    0.2s
-
-
-
-# Operation Actions
-Press Addition Operator
-    [Documentation]    Clicks the addition operator
-    Log    Pressing addition operator    console=True
-    Click Plus
-
-Press Multiplication Operator
-    [Documentation]    Clicks the multiplication operator
-    Log    Pressing multiplication operator    console=True
-    Click Multiply
-
-Press Equals
-    [Documentation]    Clicks the equals button and returns result
-    Log    Pressing equals button    console=True
-    Click Equals
     Sleep    0.5s
-    ${result}=    Get Display Value
-    Log    Result obtained: ${result}    console=True
-    RETURN    ${result}
-
-# Memory Actions
-Store In Memory
-    [Documentation]    Stores current value in memory
-    Log    Storing value in memory    console=True
-    Click Memory In
-
-Add To Memory
-    [Documentation]    Adds current value to memory
-    Log    Adding value to memory    console=True
-    Click Memory Add
-
-Recall Memory
-    [Documentation]    Recalls value from memory
-    Log    Recalling value from memory    console=True
-    Click Memory Recall
 
 # Verification Keywords
-Verify Display Shows
+Verify Result
     [Arguments]    ${expected_value}
     [Documentation]    Verifies the calculator display shows expected value
-    Log    Verifying display shows: ${expected_value}    console=True
-    Wait Until Display Shows    ${expected_value}
-
-Verify Calculation Result
-    [Arguments]    ${expected_result}
-    [Documentation]    Verifies the calculation result matches expected value
-    Log    Verifying calculation result matches: ${expected_result}    console=True
-    ${actual_result}=    Get Display Value
-    Should Be Equal As Numbers    ${actual_result}    ${expected_result}
-    Log    Verification passed: ${actual_result} equals ${expected_result}    console=True
+    Log    Verifying result: ${expected_value}    console=True
+    ${actual_value}=    Get Display Value
+    ${actual_value}=    Set Variable If    '${actual_value}' == ''    0    ${actual_value}
+    ${expected_value}=    Set Variable If    '${expected_value}' == ''    0    ${expected_value}
+    Should Be Equal As Strings    ${actual_value}    ${expected_value}
+    Log    Verification passed: ${actual_value} equals ${expected_value}    console=True
 
 # Complex Operation Flows
 Perform Addition Operation
@@ -77,9 +35,11 @@ Perform Addition Operation
     [Documentation]    Performs addition operation and returns result
     Log    Performing addition: ${first_number} + ${second_number}    console=True
     Enter Number    ${first_number}
-    Press Addition Operator
+    Click Plus
     Enter Number    ${second_number}
-    ${result}=    Press Equals
+    Click Equals
+    Sleep    0.5s
+    ${result}=    Get Display Value
     Log    Addition result: ${result}    console=True
     RETURN    ${result}
 
@@ -88,9 +48,13 @@ Perform Multiplication Operation
     [Documentation]    Performs multiplication operation and returns result
     Log    Performing multiplication: ${first_number} * ${second_number}    console=True
     Enter Number    ${first_number}
-    Press Multiplication Operator
+    Log    Clicking multiplication operator    console=True
+    Click Multiply
     Enter Number    ${second_number}
-    ${result}=    Press Equals
+    Log    Clicking equals button    console=True
+    Click Equals
+    Sleep    0.5s
+    ${result}=    Get Display Value
     Log    Multiplication result: ${result}    console=True
     RETURN    ${result}
 
@@ -98,19 +62,26 @@ Perform Memory Operation Sequence
     [Arguments]    ${data}
     [Documentation]    Performs a sequence of memory operations
     Log    Starting memory operation sequence    console=True
-    Log    Initial value: ${data}[initial]    console=True
-    Enter Number    ${data}[initial]
-    Store In Memory
-    Clear Display
-    Log    Memory add value: ${data}[memory_add]    console=True
-    Enter Number    ${data}[memory_add]
-    Add To Memory
-    Clear Display
-    Recall Memory
+    Log    Initial value: ${data}[num1]    console=True
+    Enter Number    ${data}[num1]
+    Log    Storing in memory    console=True
+    Click Memory In
+    Clear Calculator
+    Log    Memory add value: ${data}[num2]    console=True
+    Enter Number    ${data}[num2]
+    Log    Adding to memory    console=True
+    Click Memory Add
+    Clear Calculator
+    Log    Recalling memory    console=True
+    Click Memory Recall
+    Log    Clicking minus operator    console=True
     Click Minus
-    Log    Memory subtract value: ${data}[memory_subtract]    console=True
-    Enter Number    ${data}[memory_subtract]
-    ${result}=    Press Equals
+    Log    Memory subtract value: ${data}[num3]    console=True
+    Enter Number    ${data}[num3]
+    Log    Clicking equals button    console=True
+    Click Equals
+    Sleep    0.5s
+    ${result}=    Get Display Value
     Log    Memory operation result: ${result}    console=True
     RETURN    ${result}
 
@@ -118,7 +89,7 @@ Perform Memory Operation Sequence
 Initialize Calculator Session
     [Documentation]    Opens calculator and prepares for testing
     Log    Initializing calculator session    console=True
-    Open Browser    ${CALCULATOR_URL}    ${BROWSER}
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}
     Log    Calculator session initialized successfully    console=True
@@ -127,3 +98,38 @@ Cleanup Calculator Session
     [Documentation]    Closes calculator session
     Log    Cleaning up calculator session    console=True
     Close Browser
+
+Reset Calculator State
+    [Documentation]    Resets calculator to initial state
+    Clear Calculator
+    Verify Result    ${DEFAULT_VALUE}
+
+Execute Operation Flow
+    [Arguments]    ${operation}    ${min}    ${max}    ${use_decimals}
+    [Documentation]    Generates test data and executes the specified operation flow
+    ${test_data}=    Generate Basic Operation Data    ${min}    ${max}    ${use_decimals}
+    Set Test Variable    ${TEST_DATA}    ${test_data}
+    Run Keyword If    '${operation}' == 'addition'    Perform Addition Flow
+    ...    ELSE IF    '${operation}' == 'multiplication'    Perform Multiplication Flow
+
+Perform Addition Flow
+    ${result}=    Perform Addition Operation    ${TEST_DATA}[num1]    ${TEST_DATA}[num2]
+    Set Test Variable    ${ACTUAL_RESULT}    ${result}
+
+Perform Multiplication Flow
+    ${result}=    Perform Multiplication Operation    ${TEST_DATA}[num1]    ${TEST_DATA}[num2]
+    Set Test Variable    ${ACTUAL_RESULT}    ${result}
+
+Execute Memory Operation Flow
+    ${result}=    Perform Memory Operation Sequence    ${TEST_DATA}
+    Set Test Variable    ${ACTUAL_RESULT}    ${result}
+
+Verify Operation Result
+    [Arguments]    ${operation}
+    ${expected}=    Set Variable If    
+    ...    '${operation}' == 'addition'    ${TEST_DATA}[expected_addition]
+    ...    '${operation}' == 'multiplication'    ${TEST_DATA}[expected_multiplication]
+    Verify Result    ${expected}
+
+Verify Memory Operation Result
+    Verify Result    ${TEST_DATA}[expected_result]

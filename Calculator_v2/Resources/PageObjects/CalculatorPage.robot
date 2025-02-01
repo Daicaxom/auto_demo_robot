@@ -1,10 +1,10 @@
 *** Settings ***
-Documentation     Calculator Page Object containing locators and keywords
-Library    SeleniumLibrary
-Library    String
-Library    Collections
-Library    Process
-Library    OperatingSystem
+Documentation     POM for the Calculator page with basic operations.
+Library           SeleniumLibrary
+Library           String
+Library           Collections
+Library           Process
+Library           OperatingSystem
 
 *** Variables ***
 ${BROWSER}              chrome
@@ -81,14 +81,14 @@ Cleanup Calculator Session
 Wait And Click Element
     [Documentation]    Wait for element to be visible and click it
     [Arguments]    ${locator}
-    Wait Until Element Is Visible    ${locator}
+    Wait Until Element Is Enabled    ${locator}
     Click Element    ${locator}
 
 Click Number
-    [Documentation]    Click a number button on the calculator
-    [Arguments]    ${number}
-    ${button_id}=    Get From Dictionary    ${NUMBER_BUTTONS}    ${number}
-    Wait And Click Element    id=${button_id}
+    [Documentation]    Click on the number button with value ${digit}.
+    [Arguments]    ${digit}
+    ${locator}=    Set Variable    xpath=//button[normalize-space(text())='${digit}']
+    Wait And Click Element    ${locator}
 
 Click Plus
     [Documentation]    Click the plus button
@@ -131,10 +131,13 @@ Click Clear Entry
     Wait And Click Element    ${CLEAR_BTN}
 
 Get Display Value
-    [Documentation]    Get the current value from the calculator display
-    Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}
+    [Documentation]    Get the value displayed on Calculator screen
+    Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}    ${TIMEOUT}
     ${value}=    Get Element Attribute    ${CALCULATOR_DISPLAY}    value
     ${value}=    Set Variable If    '${value}' == ''    ${DEFAULT_VALUE}    ${value}
+    ${value}=    Set Variable If    '${value}' == 'undefined'    ${DEFAULT_VALUE}    ${value}
+    ${value}=    Set Variable If    '${value}' == 'null'    ${DEFAULT_VALUE}    ${value}
+    Log    Display value: ${value}    console=True
     RETURN    ${value}
 
 Convert And Compare Numbers
@@ -146,19 +149,19 @@ Convert And Compare Numbers
     ...    ELSE    Convert To Number    ${expected}
     Should Be Equal As Numbers    ${actual_num}    ${expected_num}
 
-Verify Display Value
-    [Documentation]    Verify the calculator display shows the expected value
-    [Arguments]    ${expected}
-    ${actual}=    Get Display Value
-    Convert And Compare Numbers    ${actual}    ${expected}
 
 Wait Until Display Shows
     [Documentation]    Wait until the calculator display shows the expected value
     [Arguments]    ${expected}
     Wait Until Keyword Succeeds    5s    1s    Verify Display Value    ${expected}
 
-Clear Display
-    [Documentation]    Clear the calculator display
+    
+
+Open Calculator
+    [Documentation]    Open the browser and navigate to the Calculator page.
+    Open Browser    ${URL}    ${BROWSER}
+
+Clear Calculator
+    [Documentation]    Click the clear button to reset the display to the default value.
     Wait Until Element Is Visible    ${CLEAR_BTN}    ${TIMEOUT}
     Click Element    ${CLEAR_BTN}
-    Verify Display Shows    ${DEFAULT_VALUE}

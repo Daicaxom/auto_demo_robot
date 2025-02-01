@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chi Tiết Viết Test Automation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hướng Dẫn Chi Tiết Viết Test Automation</h1>
+
+    <h2>Mục Lục</h2>
+    <ol>
+        <li><a href="#introduction">Giới thiệu về kiến trúc phân tầng</a></li>
+        <li><a href="#project-structure">Cấu trúc dự án</a></li>
+        <li><a href="#pom">Viết Page Object Model (POM)</a></li>
+        <li><a href="#flow">Viết Flow Layer</a></li>
+        <li><a href="#spec">Viết Spec Layer</a></li>
+        <li><a href="#improvements">Cải thiện quy trình viết test</a></li>
+    </ol>
+
+    <h2 id="introduction">1. Giới Thiệu về Kiến Trúc Phân Tầng</h2>
+    <p>Test automation của dự án được xây dựng theo kiến trúc phân tầng, bao gồm:</p>
+    <ul>
+        <li><strong>Core Layer:</strong> Các keyword cơ bản từ thư viện hoặc custom base keywords</li>
+        <li><strong>POM Layer:</strong> Chỉ tương tác với elements trên một page cụ thể</li>
+        <li><strong>Flow Layer:</strong> Thực hiện các business flow hoàn chỉnh</li>
+        <li><strong>Spec Layer:</strong> Test cases sử dụng Gherkin syntax</li>
+    </ul>
+
+    <h2 id="project-structure">2. Cấu Trúc Dự Án</h2>
+    <div class="code-example">
+        <pre>
+project_root/
+├── .github/
+│   └── workflows/
+│       └── robot.yml
+├── Calculator_v2/
+│   ├── Tests/
+│   │   └── CalculatorTest.robot
+│   └── Resources/
+│       └── PageObjects/
+│           └── CalculatorPage.robot
+├── requirements.txt
+└── README.md</pre>
+    </div>
+
+    <h2 id="pom">3. Viết Page Object Model (POM)</h2>
+    <p>Ví dụ về cách viết POM cho trang Calculator:</p>
+    <div class="code-example">
+        <pre>
+*** Settings ***
+Documentation     Calculator Page Object chứa các locators và các keyword thao tác
+Library    SeleniumLibrary
+Library    String
+Library    Collections
+
+*** Variables ***
+${URL}         https://testpages.eviltester.com/styled/apps/calculator.html
+${DISPLAY}                id=calculated-display
+${CLEAR_BTN}             id=buttonallclear
+${EQUALS_BTN}            id=buttonequals
+
+# Buttons cho số
+&{NUMBER_BUTTONS}  
+...    0=button00  
+...    1=button01  
+...    2=button02  
+# ... các số khác
+
+*** Keywords ***
+Open Calculator
+    [Documentation]    Mở trình duyệt và load trang Calculator
+    Open Browser    ${URL}    chrome
+    Maximize Browser Window
+
+Click Number
+    [Arguments]    ${number}
+    ${button_id}=    Get From Dictionary    ${NUMBER_BUTTONS}    ${number}
+    Wait Until Element Is Visible    id=${button_id}    20s
+    Click Element    id=${button_id}</pre>
+    </div>
+
+    <div class="tip">
+        <strong>Tip:</strong> Sử dụng Katalon Recorder để nhanh chóng ghi lại locator và sau đó tối ưu hóa lại chúng.
+    </div>
+
+    <h2 id="flow">4. Viết Flow Layer</h2>
+    <p>Flow Layer kết hợp các thao tác từ POM để tạo business flow hoàn chỉnh:</p>
+    <div class="code-example">
+        <pre>
+*** Settings ***
+Resource    ../PageObjects/CalculatorPage.robot
+
+*** Keywords ***
+Perform Addition Operation
+    [Arguments]    ${num1}    ${num2}
+    Enter First Number    ${num1}
+    Click Plus Button
+    Enter Second Number    ${num2}
+    Click Equals
+    ${result}=    Get Display Value
+    [Return]    ${result}</pre>
+    </div>
+
+    <h2 id="spec">5. Viết Spec Layer</h2>
+    <p>Spec Layer sử dụng cú pháp Gherkin để tạo test cases dễ đọc:</p>
+    <div class="code-example">
+        <pre>
+*** Settings ***
+Resource          ../Resources/TestFlows/CalculatorFlow.robot
+Test Setup        Calculator Is Ready For Input
+Test Teardown     Close Browser
+
+*** Test Cases ***
+User Can Add Two Numbers
+    [Tags]    calculator    addition    smoke
+    Given Calculator is ready for input
+    When User performs addition operation with numbers 12 and 34
+    Then Result should be 46</pre>
+    </div>
+
+    <h2 id="improvements">6. Cải Thiện Quy Trình Viết Test</h2>
+    
+    <h3>6.1. Sử dụng Code Snippets và Templates</h3>
+    <div class="tip">
+        <ul>
+            <li>Tạo template cho các file POM và Flow</li>
+            <li>Sử dụng VS Code với Robot Framework extension</li>
+            <li>Cài đặt snippets cho các pattern thường dùng</li>
+        </ul>
+    </div>
+
+    <h3>6.2. Công Cụ Hỗ Trợ</h3>
+    <div class="note">
+        <strong>Các công cụ recommended:</strong>
+        <ul>
+            <li>Katalon Recorder: Ghi lại locator tự động</li>
+            <li>VS Code + Robot Framework Extension</li>
+            <li>Chrome DevTools cho việc inspect elements</li>
+        </ul>
+    </div>
+
+    <h3>6.3. Best Practices</h3>
+    <div class="warning">
+        <strong>Lưu ý quan trọng:</strong>
+        <ul>
+            <li>Luôn sử dụng explicit wait thay vì implicit wait</li>
+            <li>Tối ưu locator theo thứ tự: ID > CSS > XPath</li>
+            <li>Tách biệt test data khỏi test script</li>
+            <li>Implement retry mechanism cho unstable tests</li>
+        </ul>
+    </div>
+
+    <h3>6.4. Tích Hợp CI/CD</h3>
+    <p>Sử dụng GitHub Actions để tự động hóa việc chạy test:</p>
+    <div class="code-example">
+        <pre>
+name: Robot Framework Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main ]
+...</pre>
+    </div>
+
+    <div class="tip">
+        <strong>Tips cho CI/CD:</strong>
+        <ul>
+            <li>Sử dụng cache để tối ưu thời gian build</li>
+            <li>Parallel test execution với pabot</li>
+            <li>Lưu test results dưới dạng artifacts</li>
+        </ul>
+    </div>
+
+</body>
+</html>

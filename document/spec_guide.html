@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Viết Test Spec</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.8;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+      color: #333;
+      font-size: 16px;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .note {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .tip {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .warning {
+      background-color: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .code-example {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    pre {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    ol, ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hướng Dẫn Viết Test Spec</h1>
+  
+  <h2>Mục Lục</h2>
+  <ol>
+    <li><a href="#introduction">Giới thiệu Test Spec</a></li>
+    <li><a href="#principles">Nguyên tắc viết Test Spec</a></li>
+    <li><a href="#speed">Tăng tốc viết Test Spec</a></li>
+    <li><a href="#template">Template Test Spec</a></li>
+    <li><a href="#best-practices">Best Practices</a></li>
+    <li><a href="#conclusion">Kết luận</a></li>
+  </ol>
+  
+  <h2 id="introduction">1. Giới Thiệu Test Spec</h2>
+  <p>
+    Test Spec (Specification Layer) là phần định nghĩa các test case theo cú pháp Gherkin. Mục tiêu của Spec Layer 
+    là cung cấp các test case dễ đọc, thân thiện với các thành viên không chuyên về lập trình, đồng thời phân tách rõ ràng 
+    giữa mô tả nghiệp vụ và thực thi của automation.
+  </p>
+  
+  <h2 id="principles">2. Nguyên Tắc Viết Test Spec</h2>
+  <ul>
+    <li><strong>Đọc dễ hiểu:</strong> Sử dụng cú pháp Gherkin (Given/When/Then) để mô tả quy trình test.</li>
+    <li><strong>Tách biệt trách nhiệm:</strong> Spec chỉ định nghĩa test case, gọi các luồng đã được xây dựng ở Flow Layer.</li>
+    <li><strong>Nhất quán:</strong> Giữ kiểu viết và định dạng ổn định giữa các test spec để dễ bảo trì.</li>
+  </ul>
+  
+  <h2 id="speed">3. Tăng Tốc Viết Test Spec</h2>
+  <p>
+    Để tạo Test Spec nhanh chóng, bạn có thể:
+  </p>
+  <ul>
+    <li><strong>Sử dụng Templates:</strong> Tạo file mẫu cho test spec với cấu trúc Gherkin và các thiết lập chuẩn, sau đó copy để tái sử dụng.</li>
+    <li><strong>Sử dụng Snippets:</strong> Lập trình viên có thể thiết lập snippets trong IDE (VS Code, PyCharm) để tự động chèn các block code mẫu.</li>
+    <li><strong>Reuse Resources:</strong> Import các file Flow và POM đã được xây dựng để Spec chỉ cần tham chiếu thay vì viết lại luồng thao tác.</li>
+  </ul>
+  
+  <h2 id="template">4. Template Test Spec</h2>
+  <p>
+    Dưới đây là một mẫu Test Spec theo cú pháp Gherkin mà bạn có thể điều chỉnh lại tùy theo ứng dụng của mình:
+  </p>
+  <div class="code-example">
+    <pre>
+*** Settings ***
+Resource          ../Resources/TestFlows/ExampleFlow.robot
+Test Setup        Example Flow Setup
+Test Teardown     Close Browser
+
+*** Test Cases ***
+User Can Perform Basic Operation
+    [Tags]    smoke    regression
+    Given Application is ready for input
+    When User performs the example operation with input "value1" and "value2"
+    Then Result should be "ExpectedResult"
+    </pre>
+  </div>
+  
+  <h2 id="best-practices">5. Best Practices Khi Viết Test Spec</h2>
+  <ul>
+    <li><strong>Rõ ràng và Ngắn gọn:</strong> Tránh lặp lại mô tả đã có trong Flow Layer. Test Spec chỉ nên tập trung vào định nghĩa các bước nghiệp vụ.</li>
+    <li><strong>Gắn Thẻ (Tags):</strong> Sử dụng tags để phân loại test case (ví dụ: smoke, regression, critical) nhằm chạy test theo mục đích.</li>
+    <li><strong>Import Chính Xác:</strong> Đảm bảo các file Flow và Resource cần thiết được import đúng, giúp test spec thực thi liền mạch.</li>
+    <li><strong>Consistent Language:</strong> Duy trì ngôn ngữ thống nhất trong toàn bộ Spec Layer để dễ hiểu và bảo trì.</li>
+    <li><strong>Document:</strong> Mỗi test case nên có một mô tả ngắn gọn, giải thích ý nghĩa của test cho mọi thành viên trong team.</li>
+  </ul>
+  
+  <h2 id="conclusion">6. Kết Luận</h2>
+  <p>
+    Việc xây dựng Test Spec bằng cách sử dụng cú pháp Gherkin giúp cho các test case trở nên dễ đọc, thân thiện và dễ bảo trì. 
+    Sử dụng template và snippets là cách hiệu quả để tăng tốc quá trình viết test case và đảm bảo tính nhất quán trong toàn bộ dự án.
+  </p>
+  
+  <div class="tip">
+    <strong>Lưu ý:</strong> Khi có sự thay đổi về nghiệp vụ hay luồng test, chỉ cần cập nhật ở Flow Layer, Test Spec sẽ tự động 
+    cập nhật thông qua resources đã import.
+  </div>
+</body>
+</html> 

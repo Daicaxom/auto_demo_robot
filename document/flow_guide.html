@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Viết Test Flow</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.8;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+      color: #333;
+      font-size: 16px;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .note {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .tip {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .warning {
+      background-color: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .code-example {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    pre {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+    ol {
+      margin-left: 20px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hướng Dẫn Viết Test Flow</h1>
+  
+  <h2>Mục Lục</h2>
+  <ol>
+    <li><a href="#identify"> Xác định luồng nghiệp vụ</a></li>
+    <li><a href="#writing"> Viết Test Flow</a></li>
+    <li><a href="#speedup"> Tăng tốc viết Test Flow</a></li>
+    <li><a href="#avoid-duplication"> Tránh trùng lặp Test Flow</a></li>
+    <li><a href="#example"> Ví dụ cụ thể</a></li>
+    <li><a href="#conclusion"> Kết Luận</a></li>
+    <li><a href="#common-flow"> Mẫu Flow Chung</a></li>
+  </ol>
+
+  <h2 id="identify">1. Xác Định Luồng (Flow) Nghiệp Vụ</h2>
+  <p>
+    Trước khi viết một Test Flow, hãy đảm bảo bạn hiểu đúng quy trình nghiệp vụ, biết được:
+  </p>
+  <ul>
+    <li><strong>Đầu vào và đầu ra:</strong> Các thông tin cần thiết và kết quả mong đợi.</li>
+    <li><strong>Các bước chủ động:</strong> Xác định các thao tác giao tiếp với UI như nhập liệu, nhấp chuột, chọn giá trị từ dropdown…</li>
+    <li><strong>Kết nối với POM:</strong> Các thao tác UI nên được định nghĩa sẵn trong POM và gọi lại trong Test Flow.</li>
+  </ul>
+  
+  <h2 id="writing">2. Viết Test Flow</h2>
+  <p>
+    Trong Test Flow, bạn tổ chức các bước thao tác theo quy trình nghiệp vụ bằng cách:
+  </p>
+  <ul>
+    <li><strong>Định nghĩa một keyword cho từng flow:</strong> Mỗi flow nghiệp vụ nên là một keyword riêng, ví dụ "Perform Addition Operation".</li>
+    <li><strong>Sử dụng keyword từ POM:</strong> Gọi trực tiếp các keyword của POM để thực hiện thao tác UI. Điều này giúp tránh việc lặp lại code.</li>
+    <li><strong>Tách riêng xử lý dữ liệu:</strong> Nếu có xử lý chuyển đổi hay tính toán, định nghĩa keyword riêng để dễ tái sử dụng.</li>
+  </ul>
+  
+  <h2 id="speedup">3. Tăng Tốc Viết Test Flow</h2>
+  <p>
+    Để tăng tốc quá trình viết Test Flow, bạn có thể:
+  </p>
+  <ul>
+    <li><strong>Sử dụng Template và Snippets:</strong>
+      <ul>
+        <li>Tạo template cho các file Test Flow với cấu trúc chuẩn đã định nghĩa sẵn.</li>
+        <li>Tận dụng snippets trong IDE như Visual Studio Code để tự động sinh ra block code mẫu.</li>
+      </ul>
+    </li>
+    <li><strong>Sử dụng công cụ hỗ trợ:</strong>
+      <ul>
+        <li>Các extension cho Robot Framework hỗ trợ tự động hoàn thiện (auto-completion) và định dạng code.</li>
+        <li>Sao chép và điều chỉnh các flow tương tự đã có sẵn thay vì viết lại từ đầu.</li>
+      </ul>
+    </li>
+    <li><strong>Phân chia module của các flow:</strong>
+      <ul>
+        <li>Chia nhỏ flow theo module nghiệp vụ (ví dụ: tính toán, quản lý người dùng...). Chia nhỏ giúp dễ bảo trì và tái sử dụng code.</li>
+      </ul>
+    </li>
+  </ul>
+  
+  <h2 id="avoid-duplication">4. Tránh Trùng Lặp Test Flow</h2>
+  <p>
+    Để đảm bảo rằng các Test Flow không bị lặp lại:
+  </p>
+  <ul>
+    <li><strong>Tái sử dụng keyword POM:</strong> Định nghĩa thao tác UI chỉ một lần trong POM và chỉ gọi keyword này trong Test Flow.</li>
+    <li><strong>Tạo thư viện chung cho flow phổ biến:</strong> Gom lại các flow được sử dụng nhiều lần vào một file hoặc thư viện riêng.</li>
+    <li><strong>Document chi tiết:</strong> Ghi chú phần mô tả cho từng keyword, giúp nhận diện các phần giống nhau.</li>
+    <li><strong>Refactor định kỳ:</strong> Khi nhận thấy có nhiều keyword tương tự, hãy kết hợp lại thành một keyword duy nhất.</li>
+  </ul>
+  
+  <h2 id="example">5. Ví Dụ Cụ Thể Về Test Flow</h2>
+  <p>
+    Ví dụ với ứng dụng Calculator, bạn có thể định nghĩa Test Flow như sau:
+  </p>
+  <div class="code-example">
+    <pre>
+*** Settings ***
+Resource    ../PageObjects/CalculatorPage.robot
+
+*** Keywords ***
+Calculator Is Ready
+    [Documentation]    Mở trang Calculator và thực hiện thiết lập ban đầu.
+    Open Calculator
+    Click Element    ${CLEAR_BTN}
+    ${display}=    Get Display Value
+    Should Be Equal    ${display}    0
+
+Perform Addition Operation
+    [Arguments]    ${num1}    ${num2}
+    [Documentation]    Thực hiện phép cộng số ${num1} với số ${num2} và trả về kết quả.
+    FOR    ${digit}    IN    @{LIST(${num1})}
+        Click Number    ${digit}
+    END
+    Click Plus Button
+    FOR    ${digit}    IN    @{LIST(${num2})}
+        Click Number    ${digit}
+    END
+    Click Equals
+    ${result}=    Get Display Value
+    [Return]    ${result}
+    </pre>
+  </div>
+  
+  <h2 id="conclusion">6. Kết Luận</h2>
+  <p>
+    Việc xây dựng Test Flow theo cách trên giúp:
+  </p>
+  <ul>
+    <li><strong>Tăng tốc độ viết test:</strong> Nhờ sử dụng lại các keyword từ POM và template chuẩn.</li>
+    <li><strong>Giảm trùng lặp code:</strong> Tách riêng từng bước nghiệp vụ, tái sử dụng và refactor khi cần.</li>
+    <li><strong>Dễ bảo trì:</strong> Nếu giao diện thay đổi, bạn chỉ cần cập nhật riêng ở POM giúp ảnh hưởng tối thiểu đến flow.</li>
+    <li><strong>Hỗ trợ làm việc nhóm:</strong> Document rõ ràng và standard hoá giúp các thành viên dễ hiểu và tái sử dụng.</li>
+  </ul>
+  
+  <h2 id="common-flow">7. Mẫu Flow Chung</h2>
+  <p>
+    Dưới đây là một mẫu Flow chung bạn có thể sử dụng làm khung sườn khi viết những Test Flow mới. Mẫu này giúp định nghĩa các bước cơ bản, đảm bảo tính nhất quán và dễ tái sử dụng.
+  </p>
+  <div class="code-example">
+    <pre>
+*** Settings ***
+Resource    ../PageObjects/CommonPage.robot
+
+*** Keywords ***
+Common Flow Template
+    [Arguments]    ${param1}    ${param2}
+    [Documentation]    Mẫu flow chung với các bước cơ bản:
+    ...    1. Kiểm tra trang đã sẵn sàng
+    ...    2. Thực hiện thao tác với các tham số được cung cấp
+    ...    3. Xác nhận kết quả đầu ra
+    Page Is Ready
+    Perform Action With Param    ${param1}
+    Perform Action With Param    ${param2}
+    ${result}=    Get Result
+    Should Be Equal    ${result}    ExpectedValue
+    [Return]    ${result}
+    </pre>
+  </div>
+  
+  <p>
+    Bạn có thể tùy chỉnh mẫu flow này theo các bước nghiệp vụ cụ thể của từng ứng dụng, đồng thời bổ sung thêm xử lý dữ liệu và kiểm tra nếu cần thiết.
+  </p>
+</body>
+</html> 
