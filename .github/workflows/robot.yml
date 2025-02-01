@@ -48,10 +48,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Configure Chrome environment
+    - name: Create test directories
       run: |
-        mkdir -p Scripts
-        python Scripts/setup_test_env.py
+        mkdir -p reports Screenshots Downloads Logs
 
     - name: Execute Robot Framework Tests
       env:
@@ -70,7 +69,6 @@ jobs:
           echo "Test attempt $i of 3..."
           if xvfb-run --server-args="-screen 0 1920x1080x24" python -m robot \
             --outputdir reports \
-            --variablefile Scripts/setup_test_env.py \
             --variable BROWSER:${BROWSER} \
             --variable HEADLESS:${HEADLESS} \
             Calculator_v2/Tests/CalculatorTest.robot; then
