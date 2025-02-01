@@ -3,10 +3,9 @@ Documentation     Test suite for calculator functionality using BDD approach
 Resource          ../Resources/PageObjects/CalculatorPage.robot
 Resource          ../Resources/TestFlows/CalculatorFlow.robot
 Resource          ../Resources/TestData/CalculatorData.robot
-Library           ../../Scripts/chrome_manager.py
 
-Suite Setup       Initialize Chrome Environment
-Suite Teardown    Cleanup Chrome Environment
+Suite Setup       Setup Calculator Environment
+Suite Teardown    Cleanup Calculator Environment
 Test Setup       Initialize Calculator Session
 Test Teardown    Cleanup Calculator Session
 
@@ -14,6 +13,7 @@ Test Teardown    Cleanup Calculator Session
 ${TIMEOUT}    10s
 ${HEADLESS}    ${TRUE}
 ${REMOTE_URL}    ${EMPTY}
+
 *** Test Cases ***
 User can perform basic integer addition
     [Documentation]    Verify that calculator can perform basic addition with integers
@@ -115,13 +115,11 @@ Result should match expected memory operation value
 
 # Setup and Teardown
 Initialize Chrome Environment
-    ${chrome_manager}=    Get Instance
-    Set Suite Variable    ${CHROME_MANAGER}    ${chrome_manager}
-    ${driver}=    Call Method    ${CHROME_MANAGER}    create_driver    headless=${HEADLESS}
-    Set Suite Variable    ${DRIVER}    ${driver}
+    Setup Calculator Environment
 
 Cleanup Chrome Environment
-    Call Method    ${CHROME_MANAGER}    cleanup
+    Close All Browsers
+    Run Keyword And Ignore Error    Remove Directory    ${CHROME_TEMP_DIR}    recursive=True
 
 Initialize Calculator Session
     Go To    ${CALCULATOR_URL}
