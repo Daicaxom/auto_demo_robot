@@ -15,8 +15,4 @@ Generate Basic Operation Data
 Generate Memory Test Data
     [Arguments]    ${min_val}=1    ${max_val}=100    ${use_decimal}=${FALSE}
     ${data}=    Generate Memory Operations    ${min_val}    ${max_val}    ${use_decimal}
-    RETURN   ${data}
-
-Create Calculator Generator
-    ${generator}=    Evaluate    calculator_data_generator.CalculatorDataGenerator()
-    RETURN    ${generator} 
+    RETURN   ${data} 
