@@ -130,9 +130,6 @@ Setup Calculator Environment
     Call Method    ${options}    add_argument    --window-size=1920,1080
     Call Method    ${options}    add_argument    --user-data-dir\=${temp_dir}
     Call Method    ${options}    add_argument    --disable-software-rasterizer
-    Call Method    ${options}    add_argument    --no-zygote
-    Call Method    ${options}    add_argument    --single-process
-    Call Method    ${options}    add_argument    --disk-cache-dir=/dev/null
     
     # Create and configure WebDriver
     Create Webdriver    Chrome    options=${options}
@@ -140,3 +137,16 @@ Setup Calculator Environment
     
     # Store temp dir for cleanup
     Set Suite Variable    ${CHROME_TEMP_DIR}    ${temp_dir}
+
+Cleanup Calculator Environment
+    Run Keyword If Test Failed    Capture Page Screenshot
+    Close All Browsers
+    Run Keyword If    ${CHROME_TEMP_DIR}    Remove Directory    ${CHROME_TEMP_DIR}    recursive=True
+
+Initialize Calculator Session
+    Go To    ${URL}
+    Wait Until Element Is Visible    ${CALCULATOR_DISPLAY}
+    Click Element    ${CALCULATOR_CLEAR}
+
+Cleanup Calculator Session
+    Click Element    ${CALCULATOR_CLEAR}
