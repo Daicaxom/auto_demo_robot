@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Sử Dụng Data Static Và Dynamic Trong TestSpec (Robot Framework)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.8;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+      color: #333;
+      font-size: 16px;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      border-bottom: 3px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-size: 2em;
+      color: #34495e;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 1.5em;
+      color: #2c3e50;
+      margin-top: 30px;
+    }
+    p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    code {
+      background-color: #f8f9fa;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
+      color: #e83e8c;
+    }
+    pre {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e9ecef;
+    }
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+    }
+    li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+      }
+      table {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Hướng Dẫn Sử Dụng Data Static Và Dynamic Trong TestSpec (Robot Framework)</h1>
+
+  <h2>1. Giới Thiệu</h2>
+  <p>
+    Trong quá trình tự động hóa kiểm thử với Robot Framework, việc quản lý dữ liệu là một phần rất quan trọng. Chúng ta có hai loại dữ liệu chính:
+  </p>
+  <ul>
+    <li><strong>Data Static</strong>: Dữ liệu không thay đổi theo thời gian, thường được lưu trong file cấu hình (ví dụ: JSON, YAML) hoặc khai báo trực tiếp. Ví dụ: URL, thông báo lỗi kỳ vọng, thông tin tài khoản mặc định.</li>
+    <li><strong>Data Dynamic</strong>: Dữ liệu được tạo ra tại thời điểm chạy test, thường sử dụng các thư viện Python như Faker để tạo ra các giá trị ngẫu nhiên. Ví dụ: tên người dùng, email, số điện thoại, số liệu tính toán.</li>
+  </ul>
+
+  <h2>2. Cấu Trúc Thư Mục Đề Xuất</h2>
+  <pre>
+project_root/
+├── Resources/
+│    ├── TestData/
+│    │     ├── dynamic/
+│    │     │      └── data_generator.py
+│    │     ├── static/
+│    │     │      └── static_data.json
+│    │     └── DataManager.robot
+└── Tests/
+     └── RegistrationTests.robot
+  </pre>
+
+  <h2>3. Phân Chia Data Theo Các Bước Trong TestSpec</h2>
+  <p>Một TestSpec điển hình theo phong cách Gherkin có các bước:</p>
+  <ol>
+    <li>
+      <strong>Given:</strong> Thiết lập điều kiện đầu vào và trạng thái ban đầu.
+      <ul>
+        <li>Sử dụng <strong>Data Static</strong> cho các giá trị cấu hình, URL, thông báo lỗi, v.v.</li>
+        <li>Ví dụ:
+          <ul>
+            <li><code>Given User is on the Registration Page</code> – sử dụng URL từ data static.</li>
+            <li><code>And User has valid registration configuration</code> – tải thông tin cấu hình từ file static.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>When:</strong> Thực hiện thao tác/chức năng của ứng dụng.
+      <ul>
+        <li>Sử dụng <strong>Data Dynamic</strong> để tạo dữ liệu mới, đảm bảo kịch bản không phụ thuộc vào giá trị cứng.</li>
+        <li>Ví dụ:
+          <ul>
+            <li><code>When User submits the Registration Form</code> – sử dụng dữ liệu dynamic như tên, email, mật khẩu được tạo bằng Faker.</li>
+            <li><code>When User performs a calculation</code> – gọi keyword với dữ liệu số ngẫu nhiên.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Then:</strong> Xác minh kết quả.
+      <ul>
+        <li>Sử dụng cả static và dynamic để kiểm tra kết quả.</li>
+        <li>Ví dụ:
+          <ul>
+            <li><code>Then Registration should be successful</code> – so sánh thông báo thành công từ data static.</li>
+            <li><code>And the calculated result should match expected sum</code> – so sánh với giá trị dynamic.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>4. Hướng Dẫn Thực Hành</h2>
+  <h3>A. Chuẩn Bị Dữ Liệu Static</h3>
+  <p>Tạo file <code>static_data.json</code> (hoặc YAML) chứa dữ liệu cấu hình. Ví dụ:</p>
+  <pre>
+{
+  "registration": {
+    "url": "https://example.com/register",
+    "success_message": "Registration completed successfully",
+    "error_message": "Please enter a valid email address"
+  },
+  "login": {
+    "url": "https://example.com/login",
+    "admin_credentials": {
+      "username": "admin_user",
+      "password": "Admin123!"
+    }
+  }
+}
+  </pre>
+
+  <h3>B. Tạo Dữ Liệu Dynamic</h3>
+  <p>Tạo file Python <code>data_generator.py</code> để sinh dữ liệu ngẫu nhiên. Ví dụ:</p>
+  <pre>
+from faker import Faker
+import random
+from datetime import datetime
+
+class DataGenerator:
+    def __init__(self):
+        self.faker = Faker()
+
+    def generate_user_data(self, user_type="personal"):
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        base_data = {
+            "username": f"test_user_{timestamp}",
+            "email": self.faker.email(),
+            "password": "Test123!",
+            "phone": self.faker.phone_number()
+        }
+        if user_type == "business":
+            base_data.update({
+                "company": self.faker.company(),
+                "business_phone": self.faker.phone_number()
+            })
+        return base_data
+
+    def generate_calculator_data(self, min_val=1, max_val=100, use_decimal=False):
+        if use_decimal:
+            num1 = round(random.uniform(min_val, max_val), 2)
+            num2 = round(random.uniform(min_val, max_val), 2)
+        else:
+            num1 = random.randint(min_val, max_val)
+            num2 = random.randint(min_val, max_val)
+        return {
+            "num1": num1,
+            "num2": num2,
+            "expected_sum": num1 + num2,
+            "expected_product": num1 * num2
+        }
+  </pre>
+
+  <h3>C. Quản Lý Dữ Liệu trong Robot Framework</h3>
+  <p>Tạo file <code>DataManager.robot</code> để định nghĩa các keywords giúp load dữ liệu static và tạo dữ liệu dynamic.</p>
+  <pre>
+*** Settings ***
+Library    ${CURDIR}/dynamic/data_generator.py    WITH NAME    Generator
+Library    OperatingSystem
+Library    yaml
+Library    json
+
+*** Variables ***
+${STATIC_DATA_DIR}    ${CURDIR}/static
+
+*** Keywords ***
+Load Static Test Data
+    [Arguments]    ${file_name}    ${format}=json
+    ${file_path}=    Join Path    ${STATIC_DATA_DIR}    ${file_name}
+    IF    '${format}' == 'json'
+        ${file_content}=    Get File    ${file_path}
+        ${data}=    Evaluate    json.loads('''${file_content}''')    json
+    ELSE IF    '${format}' == 'yaml'
+        ${file_content}=    Get File    ${file_path}
+        ${data}=    Evaluate    yaml.safe_load('''${file_content}''')    yaml
+    END
+    RETURN    ${data}
+
+Generate Dynamic User Data
+    [Arguments]    ${user_type}=personal
+    ${data}=    Generator.Generate User Data    ${user_type}
+    RETURN    ${data}
+
+Generate Calculator Data
+    [Arguments]    ${min_val}=1    ${max_val}=100    ${use_decimal}=${FALSE}
+    ${data}=    Generator.Generate Calculator Data    ${min_val}    ${max_val}    ${use_decimal}
+    RETURN    ${data}
+  </pre>
+
+  <h3>D. Ví Dụ TestSpec Sử Dụng Cả Static Và Dynamic Data</h3>
+  <p>Ví dụ file test case: <code>RegistrationTests.robot</code></p>
+  <pre>
+*** Settings ***
+Resource    ../Resources/TestData/DataManager.robot
+
+*** Test Cases ***
+Scenario: User Registration with Mixed Data
+    [Documentation]    Kịch bản đăng ký sử dụng dữ liệu static trong Given và dynamic trong When
+
+    # GIVEN: Sử dụng static data
+    ${static_data}=    Load Static Test Data    static_data.json
+    Log    Registration URL: ${static_data}[registration][url]
+    Open Browser To URL    ${static_data}[registration][url]
+
+    # WHEN: Sử dụng dynamic data
+    ${user_data}=    Generate Dynamic User Data    business
+    Log    Generated Dynamic User Data: ${user_data}
+    Submit Registration Form    ${user_data}
+
+    # THEN: Xác minh kết quả
+    Registration Should Be Successful    ${static_data}[registration][success_message]
+  </pre>
+
+  <h2>5. Best Practices &amp; Lời Khuyên</h2>
+  <ul>
+    <li>Phân tách rõ ràng giữa dữ liệu static và dynamic để đảm bảo tính ổn định và độc lập của test case.</li>
+    <li>Data static dùng cho cấu hình và giá trị kỳ vọng không thay đổi theo từng lần chạy test.</li>
+    <li>Data dynamic giúp tạo ra các tình huống test thực tế và linh hoạt, giảm thiểu lỗi trùng lặp dữ liệu.</li>
+    <li>Tạo các keyword riêng để quản lý quá trình load và xử lý dữ liệu, giúp dễ bảo trì và tái sử dụng.</li>
+    <li>Cập nhật thường xuyên các file dữ liệu khi ứng dụng có thay đổi.</li>
+  </ul>
+
+  <h2>Kết Luận</h2>
+  <p>
+    Việc kết hợp dữ liệu static và dynamic trong TestSpec của Robot Framework giúp xây dựng các kịch bản kiểm thử vừa ổn định (nhờ dữ liệu cấu hình cố định) vừa linh hoạt (nhờ dữ liệu được tạo động theo thời gian). Hãy áp dụng hướng dẫn này để đảm bảo các test case của bạn dễ bảo trì, tin cậy, và có khả năng mở rộng cao.
+  </p>
+</body>
+</html>
