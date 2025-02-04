@@ -30,32 +30,30 @@ Verify Result
     Log    Verification passed: ${actual_value} equals ${expected_value}    console=True
 
 # Complex Operation Flows
-Perform Addition Operation
-    [Arguments]    ${first_number}    ${second_number}
-    [Documentation]    Performs addition operation and returns result
-    Log    Performing addition: ${first_number} + ${second_number}    console=True
+Perform Basic Operation
+    [Arguments]    ${first_number}    ${second_number}    ${operation}
+    [Documentation]    Performs basic arithmetic operation and returns result
+    Log    Performing ${operation}: ${first_number} ${operation} ${second_number}    console=True
     Enter Number    ${first_number}
-    Click Plus
+    Run Keyword If    '${operation}' == 'addition'    Click Plus
+    ...    ELSE IF    '${operation}' == 'multiplication'    Click Multiply
     Enter Number    ${second_number}
     Click Equals
     Sleep    0.5s
     ${result}=    Get Display Value
-    Log    Addition result: ${result}    console=True
+    Log    ${operation} result: ${result}    console=True
+    RETURN    ${result}
+
+Perform Addition Operation
+    [Arguments]    ${first_number}    ${second_number}
+    [Documentation]    Performs addition operation and returns result
+    ${result}=    Perform Basic Operation    ${first_number}    ${second_number}    addition
     RETURN    ${result}
 
 Perform Multiplication Operation
     [Arguments]    ${first_number}    ${second_number}
     [Documentation]    Performs multiplication operation and returns result
-    Log    Performing multiplication: ${first_number} * ${second_number}    console=True
-    Enter Number    ${first_number}
-    Log    Clicking multiplication operator    console=True
-    Click Multiply
-    Enter Number    ${second_number}
-    Log    Clicking equals button    console=True
-    Click Equals
-    Sleep    0.5s
-    ${result}=    Get Display Value
-    Log    Multiplication result: ${result}    console=True
+    ${result}=    Perform Basic Operation    ${first_number}    ${second_number}    multiplication
     RETURN    ${result}
 
 Perform Memory Operation Sequence
@@ -109,15 +107,7 @@ Execute Operation Flow
     [Documentation]    Generates test data and executes the specified operation flow
     ${test_data}=    Generate Basic Operation Data    ${min}    ${max}    ${use_decimals}
     Set Test Variable    ${TEST_DATA}    ${test_data}
-    Run Keyword If    '${operation}' == 'addition'    Perform Addition Flow
-    ...    ELSE IF    '${operation}' == 'multiplication'    Perform Multiplication Flow
-
-Perform Addition Flow
-    ${result}=    Perform Addition Operation    ${TEST_DATA}[num1]    ${TEST_DATA}[num2]
-    Set Test Variable    ${ACTUAL_RESULT}    ${result}
-
-Perform Multiplication Flow
-    ${result}=    Perform Multiplication Operation    ${TEST_DATA}[num1]    ${TEST_DATA}[num2]
+    ${result}=    Perform Basic Operation    ${TEST_DATA}[num1]    ${TEST_DATA}[num2]    ${operation}
     Set Test Variable    ${ACTUAL_RESULT}    ${result}
 
 Execute Memory Operation Flow

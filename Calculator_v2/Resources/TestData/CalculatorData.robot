@@ -1,6 +1,7 @@
 
 
 *** Settings ***
+Documentation   Dynamic_data
 Library    ${CURDIR}/calculator_data_generator.py
 Library    Collections
 Library    BuiltIn
